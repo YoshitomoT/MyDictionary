@@ -60,8 +60,8 @@ public class WordController {
         /** デバッグ用
         *System.out.println(id);
         *System.out.println(name);
-        *System.out.println(wordService.getWordById(id));
         */
+        System.out.println(wordService.getWordById(id));
         // "word_detail"ビューを返します。
         return "word_detail";
     }

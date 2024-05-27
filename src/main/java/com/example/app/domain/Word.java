@@ -23,7 +23,7 @@ public class Word {
 	private String simpleDescription;
 	
 	//詳細な説明
-	private String detailDescription;
+	private String detailedDescription;
 	
 	//登録日時
 	private LocalDateTime registeredAt;
