@@ -34,7 +34,7 @@
 			<tr th:each="word : ${wordList}" th:object="${word}">
 				<td>[[*{dictionaryType}]]</td>
 				<td>
-					<a th:href="@{/{id}/{name}(id=*{id}, name=*{name})}">
+					<a th:href="@{/words/{id}/{name}(id=*{id}, name=*{name})}">
 						[[*{name}]]
 					</a>
 				</td>
