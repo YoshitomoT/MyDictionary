@@ -31,6 +31,9 @@ public class Word {
 	//更新日
 	private LocalDateTime updatedAt;
 	
+	//最終閲覧日
+	private LocalDateTime lastViewAt;
+	
 	//閲覧回数
 	private Integer pageViews;
 	
