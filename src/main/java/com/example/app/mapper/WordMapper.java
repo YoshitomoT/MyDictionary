@@ -11,4 +11,6 @@ public interface WordMapper {
 	
 	List<Word> selectAll();
 
+	Word selectWordById(int wordId);
+
 }

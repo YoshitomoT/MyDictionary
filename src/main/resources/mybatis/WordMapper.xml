@@ -8,5 +8,14 @@
 		FROM 
 			words
 	</select>
+	
+	<select id="selectWordById" resultType="Word">
+		SELECT 
+			* 
+		FROM 
+			words
+		WHERE
+			id = #{id}
+	</select>
 		
 </mapper>
