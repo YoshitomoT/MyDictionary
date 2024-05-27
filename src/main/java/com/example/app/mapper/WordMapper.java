@@ -13,4 +13,6 @@ public interface WordMapper {
 
 	Word selectWordById(int wordId);
 
+	Integer incrementPageViews(int wordId);
+
 }
