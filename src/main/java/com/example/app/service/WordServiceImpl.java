@@ -20,4 +20,10 @@ public class WordServiceImpl implements WordService {
 		return wordMapper.selectAll();
 	}
 
+	@Override
+	public Word getWordById(int wordId) {
+		
+		return wordMapper.selectWordById(wordId);
+	}
+
 }
