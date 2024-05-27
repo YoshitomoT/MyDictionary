@@ -22,7 +22,8 @@ public class WordController {
 	) {
 		System.out.println(wordService.getAll());
 		model.addAttribute("wordList", wordService.getAll());
-		return "all-words";
+		//テステス
+		return "all_words";
 	}
 	
 
