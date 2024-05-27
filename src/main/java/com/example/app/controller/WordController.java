@@ -14,32 +14,52 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @RequestMapping("/words")
 public class WordController {
-	
-	private final WordService wordService;
-	
-	@GetMapping
-	public String showAlls(
-			Model model
-	) {
-		System.out.println(wordService.getAll());
-		model.addAttribute("wordList", wordService.getAll());
-		//テステス
-		return "all_words";
-	}
-	
-	@GetMapping("/{id}/{name}")
-	public String showDetail(
-			@PathVariable("id") Integer id,
-			@PathVariable("name") String name,
-			Model model
-	) {
-		System.out.println(id);
-		System.out.println(name);
-		// 他の処理やモデルへの追加処理
-		return "word_detail";
-	}
-	
-	
-	
 
+    // WordServiceのインスタンスをDI（依存性注入）によって取得します。
+    private final WordService wordService;
+
+    /**
+     * 全単語を表示するメソッド。
+     * 
+     * @param model SpringのModelオブジェクト。ビューにデータを渡すために使用します。
+     * @return 表示するビューの名前（"all_words"）。
+     */
+    
+    @GetMapping
+    public String showAlls(Model model) {
+        // 全単語を取得し、コンソールに出力します（デバッグ用）。
+        System.out.println(wordService.getAll());
+        
+        // 取得した全単語リストをモデルに追加します。
+        model.addAttribute("wordList", wordService.getAll());
+        
+        // "all_words"ビューを返します。
+        return "all_words";
+    }
+
+    /**
+     * 指定されたIDと名前に基づいて単語の詳細を表示するメソッド。
+     * 
+     * @param id URLパスから取得する単語のID。
+     * @param name URLパスから取得する単語の名前。
+     * @param model SpringのModelオブジェクト。ビューにデータを渡すために使用します。
+     * @return 表示するビューの名前（"word_detail"）。
+     */
+    @GetMapping("/{id}/{name}")
+    public String showDetail(
+            @PathVariable("id") Integer id, // パス変数からIDを取得
+            @PathVariable("name") String name, // パス変数から名前を取得（未使用）
+            Model model) {
+        
+        // 指定されたIDに基づいて単語の詳細を取得し、モデルに追加します。
+        model.addAttribute("word", wordService.getWordById(id));
+        
+        /** デバッグ用
+        *System.out.println(id);
+        *System.out.println(name);
+        *System.out.println(wordService.getWordById(id));
+        */
+        // "word_detail"ビューを返します。
+        return "word_detail";
+    }
 }
