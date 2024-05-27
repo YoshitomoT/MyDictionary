@@ -18,6 +18,9 @@
 <body>
 	<h1>全単語一覧<small>Version1.0</small></h1>
 	
+	<hr>
+	<br>
+	
 	<table border="1">
 		<thead>
 			<tr>
@@ -32,7 +35,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="word : ${wordList}" th:object="${word}">
-				<td>[[*{dictionaryType}]]</td>
+				<td>（準備中）[[*{dictionaryType}]]</td>
 				<td>
 					<a th:href="@{/words/{id}/{name}(id=*{id}, name=*{name})}">
 						[[*{name}]]
