@@ -23,7 +23,7 @@ public interface WordService {
      * @param wordId 取得したい単語のID。
      * @return 指定されたIDに対応する単語。存在しない場合はnullまたは例外をスローする可能性があります。
      */
-    Word getWordById(int wordId);
+    Word getWordById(Integer wordId);
     
     /**
      * 指定されたIDに基づいて単語の最終閲覧日を更新するメソッド。
@@ -32,5 +32,5 @@ public interface WordService {
      * 
      */
 
-	void updateWordById(Integer id);
+	void updateWordById(Integer wordId);
 }
