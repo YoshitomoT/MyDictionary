@@ -3,34 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <title>単語の詳細</title>
+<!--  仮　　-->
+<style>
+        h1 {
+            display: flex;
+            align-items: baseline; /* Baseline alignment to keep text inline */
+        }
+        h1 small {
+            font-size: 0.5em; /* Adjust the size to be smaller */
+        }
+    </style>
 </head>
 <body>
-	<h1>単語名：</h1>
-	<p>読み方：[[*{pronunciation}]]</p>
-	
-	<table border="1">
+	<th:block th:object=${word}>
+		<h1>[[*{name}]]<small>(読み方：[[*{pronunciation}]])</small></h1>
+		<hr>
 		
-			<tr>
-				<th>登録している辞典</th>
-				<td>[[*{dictionaryType}]]</td>
-				
-			</tr>
-			<tr>
-				<th>シンプル意味</th>
-				<td>[[*{simpleDescription}]]</td>
-				
-			</tr>
-			<tr>
-				<th>詳細</th>
-				<td>[[*{detailDescription}]]</td>
-				
-			</tr>
+		<br>
+		<table border="1">
 			
-
-	</table>
-				<p>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]登録</p>
-				<p>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]更新</p>
-				<p>[[*{pageViews}]]回閲覧</p>	
+				<tr>
+					<th>登録している辞典</th>
+					<td>[[*{dictionaryType}]]</td>
+					
+				</tr>
+				<tr>
+					<th>シンプル意味</th>
+					<td>[[*{simpleDescription}]]</td>
+					
+				</tr>
+				<tr>
+					<th>詳細</th>
+					<td>[[*{detailDescription}]]</td>
+					
+				</tr>
+				
+	
+		</table>
+					<p>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]登録</p>
+					<p>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]更新</p>
+					<p>[[*{pageViews}]]回閲覧</p>
+	</th:block>	
+	<p><a th:href="@{/words}">一覧に戻る</a></p>
 
 </body>
 </html>
