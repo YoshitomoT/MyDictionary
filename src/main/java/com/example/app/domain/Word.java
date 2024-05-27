@@ -23,13 +23,16 @@ public class Word {
 	private String simpleDescription;
 	
 	//詳細な説明
-	private String detailDescription;
+	private String detailedDescription;
 	
 	//登録日時
 	private LocalDateTime registeredAt;
 	
 	//更新日
 	private LocalDateTime updatedAt;
+	
+	//最終閲覧日
+	private LocalDateTime lastViewAt;
 	
 	//閲覧回数
 	private Integer pageViews;

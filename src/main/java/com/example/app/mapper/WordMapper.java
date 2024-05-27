@@ -11,8 +11,10 @@ public interface WordMapper {
 	
 	List<Word> selectAll();
 
-	Word selectWordById(int wordId);
+	Word selectWordById(Integer wordId);
 
-	Integer incrementPageViews(int wordId);
+	Integer incrementPageViews(Integer wordId);
+
+	void updateLastViewById(Integer wordId);
 
 }
