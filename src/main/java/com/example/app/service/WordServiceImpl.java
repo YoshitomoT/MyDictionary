@@ -20,4 +20,18 @@ public class WordServiceImpl implements WordService {
 		return wordMapper.selectAll();
 	}
 
+	@Override
+	public Word getWordById(int wordId) {
+		
+		//wordIdに対応した単語情報の閲覧回数をインクリメント
+		wordMapper.incrementPageViews(wordId);
+		
+		//WordIdに対応した単語情報を変数に格納
+		Word word = wordMapper.selectWordById(wordId);
+		
+		
+		
+		return word;
+	}
+
 }

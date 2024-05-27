@@ -8,5 +8,24 @@
 		FROM 
 			words
 	</select>
+	
+	<select id="selectWordById" parameterType="Integer" resultType="Word">
+		SELECT 
+			* 
+		FROM 
+			words
+		WHERE
+			id = #{id}
+	</select>
+	
+	<update id="incrementPageViews" parameterType="Integer">
+		UPDATE 
+			words 
+		SET 
+			page_views = page_views + 1 
+		WHERE 
+			id = #{id};
+	</update>
+	
 		
 </mapper>
