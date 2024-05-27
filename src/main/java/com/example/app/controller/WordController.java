@@ -51,8 +51,10 @@ public class WordController {
             @PathVariable("name") String name, // パス変数から名前を取得（未使用）
             Model model) {
         
-        // 指定されたIDに基づいて単語の詳細を取得し、モデルに追加します。
+        // 指定されたIDに基づいて単語の詳細を取得し、モデルに追加
         model.addAttribute("word", wordService.getWordById(id));
+        
+        
         
         /** デバッグ用
         *System.out.println(id);
