@@ -54,7 +54,8 @@ public class WordController {
         // 指定されたIDに基づいて単語の詳細を取得し、モデルに追加
         model.addAttribute("word", wordService.getWordById(id));
         
-        
+        //モデル格納後、最終閲覧日を更新し、詳細ページからジャンプしたら最終閲覧日がアップロードされた風にする
+        wordService.updateWordById(id);
         
         /** デバッグ用
         *System.out.println(id);

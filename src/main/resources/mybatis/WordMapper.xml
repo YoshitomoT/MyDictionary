@@ -27,5 +27,14 @@
 			id = #{id};
 	</update>
 	
+	<update id="updateLastViewById" parameterType="Integer">
+		UPDATE 
+			words 
+		SET 
+			last_view_at = CURRENT_TIMESTAMP
+		WHERE 
+			id = #{id};
+	</update>
+	
 		
 </mapper>

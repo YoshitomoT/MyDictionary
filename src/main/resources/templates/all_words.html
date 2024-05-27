@@ -30,6 +30,7 @@
 				<th>シンプル意味</th>
 				<th>登録日時</th>
 				<th>更新日時</th>
+				<th>最後に見た日時</th>
 				<th>閲覧回数</th>
 			</tr>
 		</thead>
@@ -43,8 +44,9 @@
 				</td>
 				<td>[[*{pronunciation}]]</td>
 				<td>[[*{simpleDescription}]]</td>
-				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]</td>
-				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]</td>
+				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm')}]]</td>
+				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm')}]]</td>
+				<td>[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm')}]]</td>
 				<td>[[*{pageViews}]]</td>
 			</tr>
 		</tbody>	
