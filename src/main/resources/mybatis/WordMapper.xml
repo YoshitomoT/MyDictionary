@@ -1,12 +1,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.WordMapper">
-
-	<select id="selectAll" resultType="Word">
+	<resultMap type="Word" id="joinedResult" autoMapping="true">
+		<id property="id" column="id" />
+		<collection property="registeredDictList" ofType="Dictionary">
+			<id property="id" column="dictionary_id" />
+			<result property="name" column="dictionary_name"/>
+		</collection>
+	</resultMap>
+	<select id="selectAll" resultMap="joinedResult">
 		SELECT 
-			* 
+			dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
+		     words.id AS id, words.name AS name, pronunciation, simple_description, 
+		     registered_at, updated_at, last_view_at, page_views
 		FROM 
 			words
+		JOIN
+			dictionary_word
+		ON
+			 words.id = dictionary_word.word_id
+		JOIN
+			dictionarys
+		ON
+			dictionary_word.dictionary_id = dictionarys.id
+
 	</select>
 	
 	<select id="selectWordById" parameterType="Integer" resultType="Word">
