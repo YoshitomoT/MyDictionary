@@ -36,7 +36,7 @@
 		</thead>
 		<tbody>
 			<tr th:each="word : ${wordList}" th:object="${word}">
-				<td>（準備中）[[*{dictionaryType}]]</td>
+				<td>（準備中）</td>
 				<td>
 					<a th:href="@{/words/{id}/{name}(id=*{id}, name=*{name})}">
 						[[*{name}]]
