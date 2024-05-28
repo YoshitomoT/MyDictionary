@@ -24,7 +24,15 @@
 			
 				<tr>
 					<th>登録している辞典</th>
-					<td>（準備中）[[*{dictionaryType}]]</td>
+					<td>
+						<th:block th:each="registeredDict : *{registeredDictList}">
+								<p>
+									<a th:href="@{/dictionary(id=${registeredDict.id})}">
+										[[${registeredDict.name}]]
+								    </a>
+								</p>
+						</th:block>
+					</td>
 					
 				</tr>
 				<tr>
