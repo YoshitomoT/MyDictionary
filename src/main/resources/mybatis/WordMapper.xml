@@ -10,8 +10,8 @@
 	</resultMap>
 	<select id="selectAll" resultMap="joinedResult">
 		SELECT 
-			dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
-		     words.id AS id, words.name AS name, pronunciation, simple_description, 
+			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
+		     words.id AS id, words.name AS name, pronunciation, simple_description, detailed_description, reference_url,
 		     registered_at, updated_at, last_view_at, page_views
 		FROM 
 			words
@@ -29,7 +29,7 @@
 	<select id="selectWordById" parameterType="Integer" resultMap="joinedResult">
 		SELECT 
 			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
-		     words.id AS id, words.name AS name, pronunciation, simple_description, 
+		     words.id AS id, words.name AS name, pronunciation, simple_description, detailed_description, reference_url,
 		     registered_at, updated_at, last_view_at, page_views
 		FROM 
 			words

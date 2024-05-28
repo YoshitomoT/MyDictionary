@@ -26,6 +26,9 @@ public class Word {
 	//詳細な説明
 	private String detailedDescription;
 	
+	//参照するURL
+	private String referenceUrl;
+	
 	//登録日時
 	private LocalDateTime registeredAt;
 	
