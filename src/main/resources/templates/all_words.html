@@ -36,7 +36,15 @@
 		</thead>
 		<tbody>
 			<tr th:each="word : ${wordList}" th:object="${word}">
-				<td>（準備中）</td>
+				<td>
+				<th:block  th:each="registeredDict : *{registeredDictList}">
+				<p>
+				<a th:href="@{/dictionary(id=${registeredDict.id})}">
+				[[${registeredDict.name}]]
+				</a>
+				</p>	
+				</th:block>
+				</td>
 				<td>
 					<a th:href="@{/words/{id}/{name}(id=*{id}, name=*{name})}">
 						[[*{name}]]
