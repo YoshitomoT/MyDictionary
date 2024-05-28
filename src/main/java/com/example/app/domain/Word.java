@@ -1,6 +1,7 @@
 package com.example.app.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -10,8 +11,8 @@ public class Word {
 	
 	private Integer id;
 	
-	//登録する辞典名
-	private String dictionaryType;
+	//登録している辞典名
+	private List<Dictionary> registeredDictList;
 	
 	//単語名
 	private String name;
