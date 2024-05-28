@@ -26,13 +26,23 @@
 
 	</select>
 	
-	<select id="selectWordById" parameterType="Integer" resultType="Word">
+	<select id="selectWordById" parameterType="Integer" resultMap="joinedResult">
 		SELECT 
-			* 
+			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
+		     words.id AS id, words.name AS name, pronunciation, simple_description, 
+		     registered_at, updated_at, last_view_at, page_views
 		FROM 
 			words
+		JOIN
+			dictionary_word
+		ON
+			 words.id = dictionary_word.word_id
+		JOIN
+			dictionarys
+		ON
+			dictionary_word.dictionary_id = dictionarys.id
 		WHERE
-			id = #{id}
+			words.id = #{id}
 	</select>
 	
 	<update id="incrementPageViews" parameterType="Integer">
