@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>[[${pageTitle}]]</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+	<th:block th:object=${word}>
+	
+		<h1>[[${pageTitle}]]</h1>
+		
+		<h1>[[*{name}]]<small>(読み方：<input type="text" th:field="*{pronunciation}" />)</small></h1>
+		
+		<hr>
+		
+		<br>
+		<form th:action="@{/mydictionary/word/confirm}" method="post">
+			<table border="1">
+				<tr>
+					<th>登録している辞典</th>
+				</tr>
+				<tr>
+					<th>シンプル意味</th>
+					<td><input type="text" th:field="*{simpleDescription}" /></td>
+				</tr>
+				<tr>
+					<th>詳細</th>
+					<td><textarea th:field="*{detailedDescription}" rows="6" style="width: 300px;"></textarea></td>
+				</tr>
+				<tr>
+					<th>参照</th>
+					<td><input type="text" th:field="*{referenceUrl}" /></td>
+				</tr>
+			</table>
+			<input type="submit" value="送信">
+		</form>
+
+		<p>単語登録日：[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
+		<p>更新日：[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
+		<p>最終閲覧日:[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
+		<p>[[*{pageViews}]]回閲覧</p>
+	</th:block>	
+	<p><a th:href="@{/mydictionary/show/all}">一覧に戻る</a></p>
+
+</body>
+</html>
