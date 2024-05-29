@@ -47,7 +47,7 @@ public class ShowController {
      */
     @GetMapping("/word{id}/{name}")
     public String showDetail(
-            @PathVariable("id") Integer id, // パス変数からIDを取得
+            @PathVariable("id") Long id, // パス変数からIDを取得
             @PathVariable("name") String name, // パス変数から名前を取得（未使用）
             Model model) {
         

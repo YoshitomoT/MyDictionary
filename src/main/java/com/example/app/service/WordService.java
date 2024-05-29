@@ -23,14 +23,14 @@ public interface WordService {
      * @param wordId 取得したい単語のID。
      * @return 指定されたIDに対応する単語。存在しない場合はnullまたは例外をスローする可能性があります。
      */
-    Word getWordById(Integer wordId);
+    Word getWordById(Long wordId);
     
     /**
      * 指定されたIDに基づいて単語の最終閲覧日を更新するメソッド。
      * 
-     * @param wordId 取得したい単語のID。
+     * @param id 取得したい単語のID。
      * 
      */
 
-	void updateWordById(Integer wordId);
+	void updateWordById(Long wordId);
 }

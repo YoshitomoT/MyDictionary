@@ -21,7 +21,7 @@ public class WordServiceImpl implements WordService {
 	}
 
 	@Override
-	public Word getWordById(Integer wordId) {
+	public Word getWordById(Long wordId) {
 		
 		//wordIdに対応した単語情報の閲覧回数をインクリメント
 		wordMapper.incrementPageViews(wordId);
@@ -35,7 +35,7 @@ public class WordServiceImpl implements WordService {
 
 
 	@Override
-	public void updateWordById(Integer wordId) {
+	public void updateWordById(Long wordId) {
 		//対象となる単語内、最終閲覧日を更新するメソッド
 		wordMapper.updateLastViewById(wordId);
 	}
