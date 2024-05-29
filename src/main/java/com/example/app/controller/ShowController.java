@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/mydictionary/show")
 public class ShowController {
 
     // WordServiceのインスタンスをDI（依存性注入）によって取得します。
@@ -24,6 +25,7 @@ public class ShowController {
      * @return 表示するビューの名前（"all_words"）。
      */
     
+    @GetMapping("/all")
     public String showAlls(Model model) {
         // 全単語を取得し、コンソールに出力します（デバッグ用）。
         System.out.println(wordService.getAll());
@@ -43,6 +45,7 @@ public class ShowController {
      * @param model SpringのModelオブジェクト。ビューにデータを渡すために使用します。
      * @return 表示するビューの名前（"word_detail"）。
      */
+    @GetMapping("/word{id}/{name}")
     public String showDetail(
             @PathVariable("id") Integer id, // パス変数からIDを取得
             @PathVariable("name") String name, // パス変数から名前を取得（未使用）
