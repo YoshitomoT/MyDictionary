@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.app.domain.Word;
+import com.example.app.service.DictService;
 import com.example.app.service.WordService;
 
 import jakarta.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class EditWordController {
 
     private final WordService wordService;
+    private final DictService dictService;
 
 	@GetMapping("/edit")
     public String showWordForm(
@@ -47,9 +49,16 @@ public class EditWordController {
         } else {
         	model.addAttribute("pageTitle", "新規単語登録");
         }
-            
-            model.addAttribute("word", word);
-            //session.setAttribute("word", word);
+        
+        	
+	        session.setAttribute("word", word);	//今後使うかも
+	        
+	        //word_form表示用
+	        model.addAttribute("word", word);
+	        model.addAttribute("dictList", dictService.getAll());
+	        
+	        System.out.println("**************チェック**************");
+	        System.out.println(dictService.getAll());
             System.out.println(word);
 
         // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
