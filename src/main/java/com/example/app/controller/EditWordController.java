@@ -47,6 +47,7 @@ public class EditWordController {
         }
             model.addAttribute("id", id);
             model.addAttribute("word", word);
+            System.out.println(word);
 
         // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
         return "edit/word_form";
