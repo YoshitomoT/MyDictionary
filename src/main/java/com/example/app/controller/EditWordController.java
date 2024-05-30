@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.app.domain.Word;
 import com.example.app.service.WordService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -24,6 +25,7 @@ public class EditWordController {
 	@GetMapping("/edit")
     public String showWordForm(
     		@RequestParam(required = false) Long id,
+    		HttpSession session,
     		Model model
     ) {
 		
@@ -45,8 +47,9 @@ public class EditWordController {
         } else {
         	model.addAttribute("pageTitle", "新規単語登録");
         }
-            model.addAttribute("id", id);
+            
             model.addAttribute("word", word);
+            //session.setAttribute("word", word);
             System.out.println(word);
 
         // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
