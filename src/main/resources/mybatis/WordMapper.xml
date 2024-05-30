@@ -26,7 +26,7 @@
 
 	</select>
 	
-	<select id="selectWordById" parameterType="Integer" resultMap="joinedResult">
+	<select id="selectWordById" parameterType="Long" resultMap="joinedResult">
 		SELECT 
 			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
 		     words.id AS id, words.name AS name, pronunciation, simple_description, detailed_description, reference_url,
@@ -45,7 +45,7 @@
 			words.id = #{id}
 	</select>
 	
-	<update id="incrementPageViews" parameterType="Integer">
+	<update id="incrementPageViews" parameterType="Long">
 		UPDATE 
 			words 
 		SET 
@@ -54,7 +54,7 @@
 			id = #{id};
 	</update>
 	
-	<update id="updateLastViewById" parameterType="Integer">
+	<update id="updateLastViewById" parameterType="Long">
 		UPDATE 
 			words 
 		SET 
