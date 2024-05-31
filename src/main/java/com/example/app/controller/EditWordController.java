@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Word;
 import com.example.app.service.DictService;
@@ -77,7 +78,8 @@ public class EditWordController {
 	@PostMapping("/register")
 	public String registerEditedWord(
 			@ModelAttribute Word editedWord,
-			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList
+			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList,
+			RedirectAttributes rs
 	) {
 		
 		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
@@ -92,14 +94,16 @@ public class EditWordController {
 	    //Wordｓテーブル（登録している辞典の情報）の更新
 	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
 	    
+	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
 	    
-	    return "confirmation_page";
+	    
+	    return "redirect:/mydictionary/show/all"; // リダイレクト先を指定
 	}
 
 	
 	
 	
-    @PostMapping("/delete/{id}")
+    @PostMapping("/delete")
     public String deleteWord(@PathVariable Long id) {
         // 単語の削除処理を行う
         // 削除が完了したらリダイレクト先を適切なものにする
