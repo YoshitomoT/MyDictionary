@@ -1,5 +1,7 @@
 package com.example.app.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.app.domain.Word;
 import com.example.app.service.DictService;
+import com.example.app.service.DictWordService;
 import com.example.app.service.WordService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,6 +26,9 @@ public class EditWordController {
 
     private final WordService wordService;
     private final DictService dictService;
+	private final DictWordService dictWordService;
+    
+
 
 	@GetMapping("/edit")
     public String showWordForm(
@@ -57,22 +63,42 @@ public class EditWordController {
 	        model.addAttribute("word", word);
 	        model.addAttribute("dictList", dictService.getAll());
 	        
-	        System.out.println("**************チェック**************");
-	        System.out.println(dictService.getAll());
-            System.out.println(word);
+	        System.out.println("**************【チェック】単語編集ページ表示前*******************");
+	        System.out.println("dictService.getAll()->" + dictService.getAll());
+            System.out.println("word->" + word);
+            System.out.println("********************************************************");
 
         // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
         return "edit/word_form";
     }
 
-	@PostMapping("/confirm")
-	public String showConfirmationPage(@ModelAttribute Word word) {
-	    // Wordオブジェクトを確認画面に渡す
+	
+//	編集した単語の登録を行うメソッド
+	@PostMapping("/register")
+	public String registerEditedWord(
+			@ModelAttribute Word editedWord,
+			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList
+	) {
+		
+		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
+		System.out.println("editedDictIdList->" + editedDictIdList);
+		System.out.println("editedWord->" + editedWord);
+        System.out.println("***********************************************************");
+        
+		//Wordテーブル（登録している辞典以外の情報）の更新処理
+        wordService.setEditedWord(editedWord);
+        
 	    
-	    System.out.println(word);
+	    //Wordｓテーブル（登録している辞典の情報）の更新
+	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
+	    
+	    
 	    return "confirmation_page";
 	}
 
+	
+	
+	
     @PostMapping("/delete/{id}")
     public String deleteWord(@PathVariable Long id) {
         // 単語の削除処理を行う
