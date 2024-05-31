@@ -10,8 +10,8 @@
 	<h1>---[[${pageTitle}]]---</h1>
 
 	<th:block th:object="${word}">
-		<!-- <form th:action="@{/mydictionary/word/confirm}" method="post"> -->
-		<form th:action="@{/mydictionary/word/confirm(id=*{id}, name=*{name})}" method="get">
+		<form th:action="@{/mydictionary/word/register}" method="post">
+		<!-- <form th:action="@{/mydictionary/word/confirm(id=*{id}, name=*{name})}" method="get"> -->
 		
 		
 <!-- **********変更不可のフィールドは表示した内容そのままを送信パラメーターの値とする　************* -->	
@@ -33,7 +33,7 @@
 <!-- ***************************************************************** -->	
 			<h1>
 				[[*{name}]]
-				<small>(読み方：<input type="text"th:field="*{pronunciation}" />)</small>
+				<small>(読み方：<input type="text" th:field="*{pronunciation}" />)</small>
 			</h1>
 
 			<hr>
@@ -42,12 +42,15 @@
 			<table border="1">
 				<tr>
 					<th>登録している辞典</th>
-					<td><th:block th:each="dict : ${dictList}">
-							<input type="checkbox" th:name="registeredDictList"
-								th:value="${dict.name}"
-								th:checked="${word.registeredDictList.contains(dict)}">[[${dict.name}]]
-    				</th:block></td>
+					<td>
+						<th:block th:each="dict : ${dictList}">
+								<input type="checkbox" name="registeredDictIdList"
+									th:value="${dict.id}"
+									th:checked="${word.registeredDictList.contains(dict)}">[[${dict.id}]].[[${dict.name}]]
+	    				</th:block>
+    				</td>
 				</tr>
+				                               
 				<tr>
 					<th>シンプル意味</th>
 					<td><input type="text" th:field="*{simpleDescription}" /></td>
