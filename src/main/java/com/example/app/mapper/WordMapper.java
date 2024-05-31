@@ -15,6 +15,9 @@ public interface WordMapper {
 
 	Integer incrementPageViews(Long wordId);
 
-	void updateLastViewById(Long wordId);
+	void updateWordLastViewedById(Long wordId);
+
+	void updateWordByEditedWord(Word editedWord);
+	
 
 }
