@@ -13,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class WordServiceImpl implements WordService {
 
+	
 	private final WordMapper wordMapper;
+	
 
 	@Override
 	public List<Word> getAll() {
@@ -35,9 +37,23 @@ public class WordServiceImpl implements WordService {
 
 
 	@Override
-	public void updateWordById(Long wordId) {
+	public void setLastViewedDateForWordById(Long wordId) {
 		//対象となる単語内、最終閲覧日を更新するメソッド
-		wordMapper.updateLastViewById(wordId);
+		wordMapper.updateWordLastViewedById(wordId);
 	}
+	
+	
+	@Override
+	public void setEditedWord(Word editedWord) {
+		
+		wordMapper.updateWordByEditedWord(editedWord);
+		
+	}
+
+	
+		
+		
+		
+		
 
 }

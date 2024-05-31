@@ -54,14 +54,27 @@
 			id = #{id};
 	</update>
 	
-	<update id="updateLastViewById" parameterType="Long">
+	<update id="updateWordLastViewedById" parameterType="Long">
 		UPDATE 
 			words 
 		SET 
 			last_view_at = CURRENT_TIMESTAMP
 		WHERE 
-			id = #{id};
+			id = #{id}
 	</update>
+	
+	<update id="updateWordByEditedWord" parameterType="Word">
+		UPDATE 
+			words
+		SET 
+			pronunciation = #{pronunciation},
+		    simple_description = #{simpleDescription},
+		    detailed_description = #{detailedDescription},
+		    reference_url = #{referenceUrl}
+		WHERE 
+			id = #{id}
+	</update>
+	
 	
 		
 </mapper>

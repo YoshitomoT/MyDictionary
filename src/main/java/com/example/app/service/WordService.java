@@ -25,12 +25,31 @@ public interface WordService {
      */
     Word getWordById(Long wordId);
     
+   
     /**
      * 指定されたIDに基づいて単語の最終閲覧日を更新するメソッド。
      * 
      * @param id 取得したい単語のID。
      * 
      */
+	void setLastViewedDateForWordById(Long wordId);
+	
+    /**
+     * 編集されたWord情報を受け取り単語情報を更新するメソッド。
+     *
+     * @param editedWord 更新したい単語のID+更新したい単語情報。
+     * 
+     */
 
-	void updateWordById(Long wordId);
+	void setEditedWord(Word editedWord);
+	
+    /**
+     * 編集されたWord情報内、登録辞典のIDを受け取り単語情報を更新するメソッド。
+     * @param editedWordId 更新したい単語のID
+     *
+     * @param editedDictIdList 更新したい単語が持つ登録辞書のIDリスト。
+     * 
+     */
+	
+	
 }
