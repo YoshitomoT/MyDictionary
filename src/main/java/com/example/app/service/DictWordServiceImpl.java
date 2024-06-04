@@ -29,6 +29,12 @@ public class DictWordServiceImpl implements DictWordService {
 		}
 	}
 
+	@Override
+	public void deleteDictWordById(Long WordId) {
+		dictWordMapper.deleteDictWordByWordId(WordId);
+		
+	}
+
 
 
 }
