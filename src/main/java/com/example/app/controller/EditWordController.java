@@ -56,9 +56,6 @@ public class EditWordController {
         	model.addAttribute("pageTitle", "新規単語登録");
         }
         
-        	
-	        session.setAttribute("word", word);	//今後使うかも
-	        
 	        //word_form表示用
 	        model.addAttribute("word", word);
 	        model.addAttribute("dictList", dictService.getAll());
@@ -93,24 +90,36 @@ public class EditWordController {
 	    //Wordｓテーブル（登録している辞典の情報）の更新
 	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
 	    
+	    //一覧ページに表示するフラッシュメッセージの格納
 	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
 	    
-	    
-	    return "redirect:/mydictionary/show/all"; // リダイレクト先を指定
+	    // リダイレクト先を指定
+	    return "redirect:/mydictionary/show/all"; 
 	}
 
 	
 	
 //	単語の削除を行うメソッド
-    @PostMapping("/delete/")
+    @GetMapping("/delete")
     public String deleteWord(
     		@RequestParam(required = false) Long id,
     		RedirectAttributes rs
     ) {
-        // 単語の削除処理を行う
+    	
+    	//単語情報取得
+    	Word word = wordService.getWordById(id);
+    	
+        // Wordsテーブル内、単語の削除処理
     	wordService.deleteWordById(id);
-        // 削除が完了したらリダイレクト先を適切なものにする
-        return "redirect:/show/all";
+    	// Wordsテーブル内、単語が登録している辞典の情報の削除
+    	dictWordService.deleteDictWordById(id);
+    	
+    	
+    	//一覧ページに表示するフラッシュメッセージの格納
+	    rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を削除しました。");
+    	
+    	//リダイレクト先を指定
+	    return "redirect:/mydictionary/show/all"; 
 	}
 
 }
