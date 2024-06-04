@@ -6,10 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Word;
 import com.example.app.service.DictService;
@@ -98,10 +98,14 @@ public class EditWordController {
 
 	
 	
-	
-    @PostMapping("/delete/{id}")
-    public String deleteWord(@PathVariable Long id) {
+//	単語の削除を行うメソッド
+    @PostMapping("/delete/")
+    public String deleteWord(
+    		@RequestParam(required = false) Long id,
+    		RedirectAttributes rs
+    ) {
         // 単語の削除処理を行う
+    	wordService.deleteWordById(id);
         // 削除が完了したらリダイレクト先を適切なものにする
         return "redirect:/show/all";
 	}
