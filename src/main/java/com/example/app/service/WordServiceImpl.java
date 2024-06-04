@@ -24,21 +24,22 @@ public class WordServiceImpl implements WordService {
 
 	@Override
 	public Word getWordById(Long wordId) {
-		
-		//wordIdに対応した単語情報の閲覧回数をインクリメント
-		wordMapper.incrementPageViews(wordId);
-		
 		//WordIdに対応した単語情報を変数に格納
 		Word word = wordMapper.selectWordById(wordId);
-		
 		return word;
 	}
 
 
+	@Override
+	public void setPageViewsForWordById(Long wordId) {
+		//wordIdに対応した単語情報の閲覧回数をインクリメント
+		wordMapper.incrementPageViews(wordId);
+		
+	}
 
 	@Override
+	//対象となる単語の最終閲覧日を更新するメソッド
 	public void setLastViewedDateForWordById(Long wordId) {
-		//対象となる単語内、最終閲覧日を更新するメソッド
 		wordMapper.updateWordLastViewedById(wordId);
 	}
 	
@@ -49,6 +50,7 @@ public class WordServiceImpl implements WordService {
 		wordMapper.updateWordByEditedWord(editedWord);
 		
 	}
+
 
 	
 		
