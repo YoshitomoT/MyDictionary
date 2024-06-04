@@ -52,7 +52,7 @@
                 <td>[[*{pageViews}]]</td>
                 <td>
                     <a th:href="@{/mydictionary/word/edit(id=*{id})}">編集</a> <!-- 編集ボタン -->
-                    <a th:href="@{/mydictionary/delete/word{id}/{name}(id=*{id}, name=*{name})}" onclick="return confirm('削除してもよろしいですか？')">削除</a> <!-- 削除ボタン -->
+                    <a th:href="@{/mydictionary/word/delete(id=*{id})}" onclick="return confirm('削除してもよろしいですか？')">削除</a> <!-- 削除ボタン -->
                 </td>
             </tr>
         </tbody>    
