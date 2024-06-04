@@ -18,6 +18,8 @@ public interface WordMapper {
 	void updateWordLastViewedById(Long wordId);
 
 	void updateWordByEditedWord(Word editedWord);
+
+	void deleteWordById(Long wordId);
 	
 
 }
