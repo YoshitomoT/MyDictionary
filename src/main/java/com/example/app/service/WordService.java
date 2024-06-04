@@ -25,11 +25,19 @@ public interface WordService {
      */
     Word getWordById(Long wordId);
     
+    
+    /**
+     * 指定されたIDに基づいて単語の閲覧回数を更新するメソッド。
+     * 
+     * @param id 更新したい単語のID。
+     * 
+     */
+    void setPageViewsForWordById(Long wordId);
    
     /**
      * 指定されたIDに基づいて単語の最終閲覧日を更新するメソッド。
      * 
-     * @param id 取得したい単語のID。
+     * @param id 更新したい単語のID。
      * 
      */
 	void setLastViewedDateForWordById(Long wordId);
@@ -40,7 +48,6 @@ public interface WordService {
      * @param editedWord 更新したい単語のID+更新したい単語情報。
      * 
      */
-
 	void setEditedWord(Word editedWord);
 
 	void deleteWordById(Long WordId);

@@ -50,12 +50,15 @@ public class ShowController {
             @PathVariable("id") Long id, // パス変数からIDを取得
             @PathVariable("name") String name, // パス変数から名前を取得（未使用）
             Model model) {
+    	
+    	//　指定されたIDの単語の閲覧回数を更新
+    	wordService.setPageViewsForWordById(id);
         
         // 指定されたIDに基づいて単語の詳細を取得し、モデルに追加
         model.addAttribute("word", wordService.getWordById(id));
         
         //モデル格納後、最終閲覧日を更新し、詳細ページからジャンプしたら最終閲覧日がアップロードされた風にする
-        wordService.updateWordById(id);
+        wordService.setLastViewedDateForWordById(id);
         
         /** デバッグ用
         *System.out.println(id);

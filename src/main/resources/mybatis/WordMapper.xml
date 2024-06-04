@@ -70,7 +70,8 @@
 			pronunciation = #{pronunciation},
 		    simple_description = #{simpleDescription},
 		    detailed_description = #{detailedDescription},
-		    reference_url = #{referenceUrl}
+		    reference_url = #{referenceUrl},
+		    updated_at = CURRENT_TIMESTAMP
 		WHERE 
 			id = #{id}
 	</update>

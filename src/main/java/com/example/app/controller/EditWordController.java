@@ -77,7 +77,8 @@ public class EditWordController {
 	@PostMapping("/register")
 	public String registerEditedWord(
 			@ModelAttribute Word editedWord,
-			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList
+			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList,
+			RedirectAttributes rs
 	) {
 		
 		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
@@ -92,8 +93,10 @@ public class EditWordController {
 	    //Wordｓテーブル（登録している辞典の情報）の更新
 	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
 	    
+	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
 	    
-	    return "confirmation_page";
+	    
+	    return "redirect:/mydictionary/show/all"; // リダイレクト先を指定
 	}
 
 	
