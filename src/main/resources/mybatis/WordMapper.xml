@@ -76,6 +76,12 @@
 			id = #{id}
 	</update>
 	
+	<delete id="deleteWordById" parameterType="Long">
+		DELETE FROM
+			words
+		WHERE 
+			id = #{id}
+	</delete>
 	
 		
 </mapper>

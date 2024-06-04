@@ -49,6 +49,8 @@ public interface WordService {
      * 
      */
 	void setEditedWord(Word editedWord);
+
+	void deleteWordById(Long WordId);
 	
     /**
      * 編集されたWord情報内、登録辞典のIDを受け取り単語情報を更新するメソッド。

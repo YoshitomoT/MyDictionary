@@ -51,6 +51,11 @@ public class WordServiceImpl implements WordService {
 		
 	}
 
+	@Override
+	public void deleteWordById(Long wordId) {
+		wordMapper.deleteWordById(wordId);
+		
+	}
 
 	
 		
