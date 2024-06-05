@@ -69,6 +69,11 @@ public class WordServiceImpl implements WordService {
 		return wordMapper.selectLastInsertedId();
 	}
 
+	@Override
+	public int getTotalWords() {
+		return wordMapper.countTotalWords();
+	}
+
 	
 		
 		

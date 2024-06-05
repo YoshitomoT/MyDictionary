@@ -3,10 +3,16 @@
 <mapper namespace="com.example.app.mapper.DictMapper">
 	
 	<select id="selectAll" resultType="Dictionary">
-		SELECT
-			*
-		FROM
-			dictionarys		
+		SELECT 
+			dictionarys.id, dictionarys.name , COUNT(word_id) AS word_amount
+		FROM 
+			dictionarys
+		JOIN 
+			dictionary_word
+		ON 
+			dictionarys.id = dictionary_word.dictionary_id
+		GROUP BY 
+			dictionary_id;	
 	</select>
 	
 
