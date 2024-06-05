@@ -4,16 +4,23 @@
 	
 	<select id="selectAll" resultType="Dictionary">
 		SELECT 
-			dictionarys.id, dictionarys.name , COUNT(word_id) AS word_amount
+		    dictionarys.id, 
+		    dictionarys.name, 
+		    COALESCE(COUNT(dictionary_word.word_id), 0) AS word_amount
 		FROM 
-			dictionarys
-		JOIN 
-			dictionary_word
+		    dictionarys
+		LEFT JOIN 
+		    dictionary_word
 		ON 
-			dictionarys.id = dictionary_word.dictionary_id
+		    dictionarys.id = dictionary_word.dictionary_id
 		GROUP BY 
-			dictionary_id;	
+		    dictionarys.id, dictionarys.name;
 	</select>
+
+	<insert id="insertDict" parameterType="Dictionary">
+		INSERT INTO dictionarys (name)
+		VALUES (#{name})
+	</insert>
 	
 
 	

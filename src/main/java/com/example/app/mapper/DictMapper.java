@@ -10,6 +10,8 @@ import com.example.app.domain.Dictionary;
 public interface DictMapper {
 
 	List<Dictionary> selectAll();
+
+	void insertDict(Dictionary addDict);
 	
 	
 

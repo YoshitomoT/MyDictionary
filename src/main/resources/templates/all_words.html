@@ -10,13 +10,16 @@
 <body>
     <h1>全単語一覧<small>Version0.6</small></h1>
 
-    <p><a th:href="@{/mydictionary/word/add}">新しい単語を追加する</a></p> <!-- 新規単語追加ページへのリンク -->
+    <p>
+    	<a th:href="@{/mydictionary/dictionary/add}">新しい辞典を追加する</a>／
+		<a th:href="@{/mydictionary/word/add}">新しい単語を追加する</a>
+    </p>
     <hr>
 
 	<p>単語登録数：[[${totalWords}]]語</p>
 	<ul>
-			<li th:each="dict : ${dictList}" th:object="${dict}">
-			[[*{name}]]辞典:[[*{wordAmount}]]語
+			<li th:each="dict, status : ${dictList}" th:object="${dict}">
+			[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
 			</li>
 <!-- 				<li　>英単語辞典：3語</li>
 				<li>日本語辞典：1,500語</li>

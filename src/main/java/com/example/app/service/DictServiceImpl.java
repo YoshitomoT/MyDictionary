@@ -20,4 +20,10 @@ public class DictServiceImpl implements DictService {
 		return dictMapper.selectAll();
 	}
 
+	@Override
+	public void registerDict(Dictionary addDict) {
+		dictMapper.insertDict(addDict);
+		
+	}
+
 }
