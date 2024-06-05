@@ -57,6 +57,12 @@ public class WordServiceImpl implements WordService {
 		
 	}
 
+	@Override
+	public void setNewWord(Word addWord) {
+		wordMapper.insertWord(addWord);
+		
+	}
+
 	
 		
 		
