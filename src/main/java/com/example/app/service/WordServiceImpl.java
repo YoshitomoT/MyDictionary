@@ -63,6 +63,12 @@ public class WordServiceImpl implements WordService {
 		
 	}
 
+	@Override
+	public Long getLastInsertedId() {
+		
+		return wordMapper.selectLastInsertedId();
+	}
+
 	
 		
 		

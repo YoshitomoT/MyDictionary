@@ -61,5 +61,15 @@ public interface WordService {
      */
 	void setNewWord(Word addWord);
 	
+    /**
+     * 新規単語登録の際、BDに最後に追加した単語のid情報を取得するメソッド。
+     *
+     * @return id BDに最後に追加した単語のid情報
+     * 
+     */
+	Long getLastInsertedId();
+	
+
+	
 	
 }
