@@ -17,8 +17,13 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public List<Dictionary> getAll() {
-		
 		return dictMapper.selectAll();
+	}
+
+	@Override
+	public void registerDict(Dictionary addDict) {
+		dictMapper.insertDict(addDict);
+		
 	}
 
 }

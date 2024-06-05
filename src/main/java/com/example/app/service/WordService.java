@@ -69,6 +69,15 @@ public interface WordService {
      */
 	Long getLastInsertedId();
 	
+    /**
+     * 登録している全単語数を取得するメソッド。
+     *
+     * @return 登録している全単語数
+     * 
+     */
+	int getTotalWords();
+	
+	
 
 	
 	

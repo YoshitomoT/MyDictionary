@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.app.service.DictService;
 import com.example.app.service.WordService;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ public class ShowController {
 
     // WordServiceのインスタンスをDI（依存性注入）によって取得します。
     private final WordService wordService;
+	private final DictService dictService;
 
     /**
      * 全単語を表示するメソッド。
@@ -27,11 +29,18 @@ public class ShowController {
     
     @GetMapping("/all")
     public String showAlls(Model model) {
-        // 全単語を取得し、コンソールに出力します（デバッグ用）。
-        System.out.println(wordService.getAll());
-        
-        // 取得した全単語リストをモデルに追加します。
+
+        // すべての単語の情報をリストで取得し、モデルに格納
         model.addAttribute("wordList", wordService.getAll());
+        //System.out.println(wordService.getAll());	//確認
+        
+        //登録している全単語数を取得し、モデルに格納
+        model.addAttribute("totalWords", wordService.getTotalWords());
+        
+        
+        //すべての辞典の情報をリストで取得し、モデルに格納
+        model.addAttribute("dictList", dictService.getAll());
+        System.out.println("辞典情報->" + dictService.getAll());	//確認用
         
         // "all_words"ビューを返します。
         return "all_words";
