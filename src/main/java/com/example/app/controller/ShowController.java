@@ -30,10 +30,12 @@ public class ShowController {
     @GetMapping("/all")
     public String showAlls(Model model) {
 
-        
         // すべての単語の情報をリストで取得し、モデルに格納
         model.addAttribute("wordList", wordService.getAll());
-        //System.out.println(wordService.getAll());	//確認用
+        //System.out.println(wordService.getAll());	//確認
+        
+        //登録している全単語数を取得し、モデルに格納
+        model.addAttribute("totalWords", wordService.getTotalWords());
         
         
         //すべての辞典の情報をリストで取得し、モデルに格納
