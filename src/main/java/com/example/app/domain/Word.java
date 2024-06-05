@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Word {
 	
-	private Integer id;
+	private Long id;
 	
 	//登録している辞典名
 	private List<Dictionary> registeredDictList;
