@@ -91,5 +91,10 @@
 	
 	</insert>
 	
+	<select id="selectLastInsertedId" resultType="Long">
+		SELECT 
+			LAST_INSERT_ID()
+	</select>
+	
 		
 </mapper>

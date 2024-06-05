@@ -20,7 +20,11 @@ public interface WordMapper {
 	void updateWordByEditedWord(Word editedWord);
 
 	void deleteWordById(Long wordId);
-	
+
 	void insertWord(Word addWord);
+
+	Long selectLastInsertedId();
+
+	
 
 }
