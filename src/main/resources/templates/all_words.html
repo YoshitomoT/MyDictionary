@@ -13,9 +13,8 @@
     <p><a th:href="@{/mydictionary/word/add}">新しい単語を追加する</a></p> <!-- 新規単語追加ページへのリンク -->
     <hr>
 
+	<p>単語登録数：[[${totalWords}]]語</p>
 	<ul>
-		<li>単語登録数：1600語
-			<ul>
 			<li th:each="dict : ${dictList}" th:object="${dict}">
 			[[*{name}]]辞典:[[*{wordAmount}]]語
 			</li>
@@ -23,8 +22,6 @@
 				<li>日本語辞典：1,500語</li>
 				<li>コーディング用語辞典：5語</li>
 				<li>その他辞典：1語</li> -->
-			</ul>
-		</li>
 	</ul>
 	
 	<h2 th:if="${statusMessage}">[[${statusMessage}]]</h2>
