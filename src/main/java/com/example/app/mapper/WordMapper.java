@@ -25,6 +25,8 @@ public interface WordMapper {
 
 	Long selectLastInsertedId();
 
+	int countTotalWords();
+
 	
 
 }

@@ -96,5 +96,12 @@
 			LAST_INSERT_ID()
 	</select>
 	
+	<select id="countTotalWords" resultType="int">
+		SELECT 
+			COUNT(id) AS total_words
+		FROM 
+			words
+	</select>
+	
 		
 </mapper>
