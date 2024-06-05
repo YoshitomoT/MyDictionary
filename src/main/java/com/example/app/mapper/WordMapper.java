@@ -21,5 +21,6 @@ public interface WordMapper {
 
 	void deleteWordById(Long wordId);
 	
+	void insertWord(Word addWord);
 
 }

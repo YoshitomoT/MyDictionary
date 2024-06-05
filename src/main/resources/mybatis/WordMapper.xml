@@ -83,5 +83,13 @@
 			id = #{id}
 	</delete>
 	
+	<insert id="insertWord" parameterType="Word">
+		INSERT INTO 
+			words (`name`, `pronunciation`, `simple_description`, `detailed_description`, `reference_url`) 
+		VALUES
+			(#{name}, #{pronunciation}, #{simpleDescription}, #{detailedDescription}, #{referenceUrl})
+	
+	</insert>
+	
 		
 </mapper>
