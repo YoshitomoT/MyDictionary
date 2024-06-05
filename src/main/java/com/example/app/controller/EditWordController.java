@@ -27,48 +27,86 @@ public class EditWordController {
     private final WordService wordService;
     private final DictService dictService;
 	private final DictWordService dictWordService;
+	
+
     
 
 
-	@GetMapping("/edit")
-    public String showWordForm(
+	@GetMapping({"/add", "/edit"})
+    public String editWordForm(
     		@RequestParam(required = false) Long id,
     		HttpSession session,
     		Model model
     ) {
 		
-		Word word = null;
+		Word word = new Word();
 		
 		//idがある　【単語の編集】　/　idがない　【単語の新規登録】
         if (id != null) {
    
-        	//idが不正の場合、リダイレクト
-        	if (id > wordService.getAll().size()) {
-        		return "redirect:/mydictionary/show/all";
-        	}
+//        	//idが不正の場合、リダイレクト
+//        	if (id > wordService.getAll().size()) {
+//        		System.out.println(wordService.getAll().size() + "しかないよ");
+//        		return "redirect:/mydictionary/show/all";
+//        	}
         	
         	//idが問題ない場合、該当のidのword情報を受け取る
         	model.addAttribute("pageTitle", "単語の編集");
-        	
         	word = wordService.getWordById(id);
         	
         } else {
         	model.addAttribute("pageTitle", "新規単語登録");
+        	System.out.println(word);	//デバック用
+        	model.addAttribute("word", word);
+	        model.addAttribute("dictList", dictService.getAll());
+	        return "edit/add_word_form";
+	        
         }
         
 	        //word_form表示用
 	        model.addAttribute("word", word);
 	        model.addAttribute("dictList", dictService.getAll());
 	        
-	        System.out.println("**************【チェック】単語編集ページ表示前*******************");
-	        System.out.println("dictService.getAll()->" + dictService.getAll());
-            System.out.println("word->" + word);
-            System.out.println("********************************************************");
+//	        System.out.println("**************【チェック】単語編集ページ表示前*******************");
+//	        System.out.println("dictService.getAll()->" + dictService.getAll());
+//          System.out.println("word->" + word);
+//          System.out.println("********************************************************");
 
         // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
         return "edit/word_form";
     }
 
+	
+//	編集した単語の登録を行うメソッド
+	@PostMapping("/add")
+	public String registerAddWord(
+			@ModelAttribute Word addWord,
+			@RequestParam(name ="registeredDictIdList") List<Integer> addDictIdList,
+			RedirectAttributes rs
+			) {
+		
+		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
+		System.out.println("addDictIdList->" + addDictIdList);
+		System.out.println("addWord->" + addWord);
+		System.out.println("***********************************************************");
+		
+		//Wordsテーブルの更新処理(単語の追加)
+		wordService.setNewWord(addWord);
+		//dictionary_wordテーブルの更新に必要な新規登録した単語のID情報を取得
+		Long newWordId = wordService.getLastInsertedId();
+		
+		System.out.println("newWordId->" + newWordId);	//デバック用
+		
+	    //dictionary_wordテーブルの更新処理（単語が登録している辞典情報）
+	    dictWordService.setDictWord(newWordId, addDictIdList);
+	
+		//一覧ページに表示するフラッシュメッセージの格納
+		rs.addFlashAttribute("statusMessage", "単語「" + addWord.getName() + "」を登録しました。");
+		
+		// リダイレクト先を指定
+		return "redirect:/mydictionary/show/all"; 
+	}
+	
 	
 //	編集した単語の登録を行うメソッド
 	@PostMapping("/register")

@@ -52,13 +52,24 @@ public interface WordService {
 
 	void deleteWordById(Long WordId);
 	
+	
     /**
-     * 編集されたWord情報内、登録辞典のIDを受け取り単語情報を更新するメソッド。
-     * @param editedWordId 更新したい単語のID
+     * 新規単語登録の際、入力項目の説明をWordに入れるメソッド。
      *
-     * @param editedDictIdList 更新したい単語が持つ登録辞書のIDリスト。
+     * @param addWord 更新したい単語のID+更新したい単語情報。
      * 
      */
+	void setNewWord(Word addWord);
+	
+    /**
+     * 新規単語登録の際、BDに最後に追加した単語のid情報を取得するメソッド。
+     *
+     * @return id BDに最後に追加した単語のid情報
+     * 
+     */
+	Long getLastInsertedId();
+	
+
 	
 	
 }
