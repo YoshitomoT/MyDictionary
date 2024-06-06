@@ -18,11 +18,14 @@
 	</select>
 
 	<insert id="insertDict" parameterType="Dictionary">
-		INSERT INTO dictionarys (name)
-		VALUES (#{name})
+		INSERT INTO dictionarys (id, name)
+		VALUES (#{id}, #{name})
 	</insert>
 	
-
-	
-		
+	<select id="countDict" resultType="int">
+		SELECT 
+			COUNT(name)
+		FROM 
+			dictionarys;
+	</select>	
 </mapper>
