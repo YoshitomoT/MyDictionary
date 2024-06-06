@@ -3,13 +3,29 @@
 <mapper namespace="com.example.app.mapper.DictMapper">
 	
 	<select id="selectAll" resultType="Dictionary">
-		SELECT
-			*
-		FROM
-			dictionarys		
+		SELECT 
+		    dictionarys.id, 
+		    dictionarys.name, 
+		    COALESCE(COUNT(dictionary_word.word_id), 0) AS word_amount
+		FROM 
+		    dictionarys
+		LEFT JOIN 
+		    dictionary_word
+		ON 
+		    dictionarys.id = dictionary_word.dictionary_id
+		GROUP BY 
+		    dictionarys.id, dictionarys.name;
 	</select>
-	
 
+	<insert id="insertDict" parameterType="Dictionary">
+		INSERT INTO dictionarys (id, name)
+		VALUES (#{id}, #{name})
+	</insert>
 	
-		
+	<select id="countDict" resultType="int">
+		SELECT 
+			COUNT(name)
+		FROM 
+			dictionarys;
+	</select>	
 </mapper>

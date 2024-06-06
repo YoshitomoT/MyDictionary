@@ -9,4 +9,6 @@ public interface DictService {
 	
 	List<Dictionary> getAll();
 
+	void registerDict(Dictionary addDict);
+
 }
