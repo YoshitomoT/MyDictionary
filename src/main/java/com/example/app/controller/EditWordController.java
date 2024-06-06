@@ -1,5 +1,6 @@
 package com.example.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -81,9 +82,13 @@ public class EditWordController {
 	@PostMapping("/add")
 	public String registerAddWord(
 			@ModelAttribute Word addWord,
-			@RequestParam(name ="registeredDictIdList") List<Integer> addDictIdList,
+			@RequestParam(name ="registeredDictIdList", required = false) List<Integer> addDictIdList,
 			RedirectAttributes rs
 			) {
+		
+	    if (addDictIdList == null) {
+	        addDictIdList = new ArrayList<>();
+	    }
 		
 		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
 		System.out.println("addDictIdList->" + addDictIdList);
@@ -112,9 +117,14 @@ public class EditWordController {
 	@PostMapping("/register")
 	public String registerEditedWord(
 			@ModelAttribute Word editedWord,
-			@RequestParam(name ="registeredDictIdList") List<Integer> editedDictIdList,
+			@RequestParam(name ="registeredDictIdList", required = false) List<Integer> editedDictIdList,
 			RedirectAttributes rs
 	) {
+		
+	    if (editedDictIdList == null) {
+	    	editedDictIdList = new ArrayList<>();
+	    }
+		
 		
 		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
 		System.out.println("editedDictIdList->" + editedDictIdList);
