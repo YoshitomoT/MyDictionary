@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <title>[[${pageTitle}]]</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/js/validate.js}"></script>
 </head>
 <body>
 
@@ -42,13 +43,16 @@
                 <tr>
                     <th>登録している辞典</th>
                     <td>
-                        <th:block th:each="dict, status : ${dictList}">
-                                <input type="checkbox" 
-                                       name="registeredDictIdList"
-                                       th:value="${dict.id}">
-                                       [[${status.index + 1}]].[[${dict.name}]]
-                        </th:block>
-                    </td>
+						<th:block th:each="dict, status : ${dictList}">
+						    <input type="checkbox" 
+						           name="registeredDictIdList"
+						           th:value="${dict.id}"
+						           class="dict-checkbox">
+						           [[${status.index + 1}]].[[${dict.name}]]
+						</th:block>
+
+						
+					</td>
                 </tr>
                                                
                 <tr>
@@ -65,7 +69,7 @@
                     <td><input type="text" th:field="*{referenceUrl}" th:placeholder="'ここに登録したいURLを入力してください。※1～50文字以内'" maxlength="50" /></td>
                 </tr>
             </table>
-            <input type="submit" value="送信">
+            <input type="submit" onclick="return validateCheckboxes()" value="登録">
         </form>
 
     </th:block>
