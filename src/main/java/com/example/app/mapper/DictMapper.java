@@ -12,6 +12,8 @@ public interface DictMapper {
 	List<Dictionary> selectAll();
 
 	void insertDict(Dictionary addDict);
+
+	int countDict();
 	
 	
 
