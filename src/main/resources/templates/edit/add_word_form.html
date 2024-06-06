@@ -44,11 +44,13 @@
                     <th>登録している辞典</th>
                     <td>
 						<th:block th:each="dict, status : ${dictList}">
-						    <input type="checkbox" 
-						           name="registeredDictIdList"
-						           th:value="${dict.id}"
-						           class="dict-checkbox">
-						           [[${status.index + 1}]].[[${dict.name}]]
+							<th:block th:if="${dict.name != '未設定'}">
+							    <input type="checkbox" 
+							           name="registeredDictIdList"
+							           th:value="${dict.id}"
+							           class="dict-checkbox">
+							           [[${status.index + 1}]].[[${dict.name}]]
+							</th:block>
 						</th:block>
 
 						
