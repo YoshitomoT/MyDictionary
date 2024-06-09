@@ -15,4 +15,6 @@ public interface DictService {
 
 	void deleteDictById(Integer dictId);
 
+	void setDictByDict(Dictionary dict);
+
 }

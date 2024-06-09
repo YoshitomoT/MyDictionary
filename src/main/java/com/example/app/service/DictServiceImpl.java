@@ -40,4 +40,9 @@ public class DictServiceImpl implements DictService {
 		dictMapper.deleteDict(dictId);
 	}
 
+	@Override
+	public void setDictByDict(Dictionary dict) {
+		dictMapper.updateDict(dict);
+	}
+
 }
