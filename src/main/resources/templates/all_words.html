@@ -31,7 +31,14 @@
 			</th:block>
 			<th:block th:if="*{id != 99}">
 				[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
+				
+	            <a th:href="@{/mydictionary/dictionary/edit(id=*{id})}">編集</a> <!-- 編集ボタン -->
+	            <a 
+					th:href="@{/mydictionary/dictionary/delete(id=*{id})}" 
+		            onclick="return confirm('この辞典を削除してもよろしいですか？\n※登録している辞典がなくなる単語は「未分類」にカテゴライズされます。')"
+	            >削除</a> <!-- 削除ボタン -->
 			</th:block>
+
 		</li>
 	</ul>
 	<!--/*************************************************************************************************************/-->

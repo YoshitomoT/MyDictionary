@@ -13,5 +13,8 @@ public interface DictWordMapper {
 	
 	void insertDictWordByWordIdAndDictId(Long editedWordId, Integer editedDictId);
 
+	void deleteDictWordByDictId(Integer dictId);
+
+
 
 }

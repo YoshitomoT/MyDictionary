@@ -9,10 +9,6 @@
 			words
 	</select>
 	
-
-
-
-
 	<select id="selectAllWithDict" resultMap="joinedResult">
 		SELECT 
 			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
