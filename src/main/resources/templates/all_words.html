@@ -16,15 +16,18 @@
     </p>
     <hr>
 
+	<!--/********** 単語登録数と各辞書の単語数の表示 ************************************************************/-->
 	<p>単語登録数：[[${totalWords}]]語</p>
 	<ul>
 			<li th:each="dict, status : ${dictList}" th:object="${dict}">
+			<!-- IDが99（未定義）の場合語尾に辞書をつけない -->
+			<th:block th:if="*{id == 99}">
+				[[${status.index + 1}]].[[*{name}]]:[[*{wordAmount}]]語
+			</th:block>
+			<th:block th:if="*{id != 99}">
 			[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
+			</th:block>
 			</li>
-<!-- 				<li　>英単語辞典：3語</li>
-				<li>日本語辞典：1,500語</li>
-				<li>コーディング用語辞典：5語</li>
-				<li>その他辞典：1語</li> -->
 	</ul>
 	
 	<h2 th:if="${statusMessage}">[[${statusMessage}]]</h2>
