@@ -40,6 +40,12 @@ public class DictWordServiceImpl implements DictWordService {
 		
 	}
 
+	@Override
+	public void deleteDictWordByDictId(Integer dictId) {
+		dictWordMapper.deleteDictWordByDictId(dictId);
+		
+	}
+
 
 
 

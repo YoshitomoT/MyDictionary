@@ -21,6 +21,13 @@
 			word_id = #{editedWordId}
 	</delete>
 	
+	<delete id="deleteDictWordByDictId" parameterType="Integer">
+		DELETE FROM 
+			dictionary_word 
+		WHERE 
+			dictionary_id = #{dictId}
+	</delete>
+	
 	<insert id="insertDictWordByWordIdAndDictId">
 		INSERT INTO 
 			dictionary_word(`word_id`, `dictionary_id`) 
