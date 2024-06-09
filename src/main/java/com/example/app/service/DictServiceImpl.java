@@ -30,4 +30,8 @@ public class DictServiceImpl implements DictService {
 		
 	}
 
+	@Override
+	public Dictionary getDictById(Integer dictId) {
+		return dictMapper.selectDictById(dictId);
+	}
 }
