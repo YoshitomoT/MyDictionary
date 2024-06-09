@@ -44,7 +44,7 @@
 					<th>登録している辞典</th>
 					<td>
 						<th:block th:each="dict, status : ${dictList}">
-							<th:block th:if="${dict.name != '未設定'}">
+							<th:block th:if="${dict.id != 99}">
 									<input type="checkbox" name="registeredDictIdList"
 										th:value="${dict.id}"
 										th:checked="${word.registeredDictList.contains(dict)}">[[${status.index + 1}]].[[${dict.name}]]
