@@ -60,9 +60,13 @@
                 <td>
                     <th:block  th:each="registeredDict : *{registeredDictList}">
                         <p>
+							<!--/未実装
                             <a th:href="@{/dictionary(id=${registeredDict.id})}">
+							/-->
                                 [[${registeredDict.name}]]
+                            <!--/未実装
                             </a>
+                            /-->
                         </p>    
                     </th:block>
                 </td>
