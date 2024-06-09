@@ -9,4 +9,12 @@ public interface DictService {
 	
 	List<Dictionary> getAll();
 
+	void registerDict(Dictionary addDict);
+
+	Dictionary getDictById(Integer dictId);
+
+	void deleteDictById(Integer dictId);
+
+	void setDictByDict(Dictionary dict);
+
 }

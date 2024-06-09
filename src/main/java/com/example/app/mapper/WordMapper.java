@@ -10,6 +10,8 @@ import com.example.app.domain.Word;
 public interface WordMapper {
 	
 	List<Word> selectAll();
+	
+	List<Word> selectAllWithDict();
 
 	Word selectWordById(Long wordId);
 
@@ -24,6 +26,9 @@ public interface WordMapper {
 	void insertWord(Word addWord);
 
 	Long selectLastInsertedId();
+
+	int countTotalWords();
+
 
 	
 

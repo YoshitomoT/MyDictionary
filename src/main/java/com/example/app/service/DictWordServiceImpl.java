@@ -13,6 +13,11 @@ import lombok.RequiredArgsConstructor;
 public class DictWordServiceImpl implements DictWordService {
 	
 	private final DictWordMapper dictWordMapper;
+	
+	@Override
+	public List<Long> getWordId() {
+		return dictWordMapper.selectWordIdWithDictInfo();
+	}
 
 	@Override
 	public void setDictWord(Long editedWordId, List<Integer> editedDictIdList) {
@@ -34,6 +39,14 @@ public class DictWordServiceImpl implements DictWordService {
 		dictWordMapper.deleteDictWordByWordId(WordId);
 		
 	}
+
+	@Override
+	public void deleteDictWordByDictId(Integer dictId) {
+		dictWordMapper.deleteDictWordByDictId(dictId);
+		
+	}
+
+
 
 
 
