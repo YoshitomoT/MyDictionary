@@ -11,4 +11,10 @@ public interface DictService {
 
 	void registerDict(Dictionary addDict);
 
+	Dictionary getDictById(Integer dictId);
+
+	void deleteDictById(Integer dictId);
+
+	void setDictByDict(Dictionary dict);
+
 }

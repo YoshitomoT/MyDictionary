@@ -14,6 +14,12 @@ public interface DictMapper {
 	void insertDict(Dictionary addDict);
 
 	int countDict();
+
+	Dictionary selectDictById(Integer dictId);
+
+	void deleteDict(Integer dictId);
+
+	void updateDict(Dictionary dict);
 	
 	
 
