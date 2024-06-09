@@ -17,6 +17,14 @@
 		    dictionarys.id, dictionarys.name;
 	</select>
 
+	<select id="selectDictById" parameterType="Integer" resultType="Dictionary">
+		SELECT
+			*
+		FROM
+			dictionarys
+		WHERE
+			id = #{dictId}
+	</select>
 	<insert id="insertDict" parameterType="Dictionary">
 		INSERT INTO dictionarys (id, name)
 		VALUES (#{id}, #{name})

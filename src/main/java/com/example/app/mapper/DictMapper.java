@@ -15,6 +15,7 @@ public interface DictMapper {
 
 	int countDict();
 	
+	Dictionary selectDictById(Integer dictId);
 	
 
 }
