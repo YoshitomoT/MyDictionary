@@ -30,7 +30,6 @@ public class EditDictController {
 		model.addAttribute("dictList", dictService.getAll());
 		model.addAttribute("dictionary", new Dictionary());
 		model.addAttribute("pageTitle", "辞書の新規登録");
-		System.out.println("OK!!!!!!!!!!!!!");
 		return "edit/add_dictionary_form";
 	}
 	
@@ -47,6 +46,32 @@ public class EditDictController {
 		rs.addFlashAttribute("statusMessage", "「" + addDict.getName() + "」という辞典を新しく登録しました。");
 		
 		// リダイレクト先を指定
+		return "redirect:/mydictionary/show/all";
+	}
+
+	@GetMapping("/edit")
+	public String GetEditDictName(
+			@RequestParam("id") Integer dictId,
+			Model model
+	) {
+		model.addAttribute("dict", dictService.getDictById(dictId));
+		model.addAttribute("pageTitle", "辞書名の変更");
+		return "edit/edit_dictionary_form";
+	}
+	
+	@PostMapping("/edit")
+	public String PostEditDictName(
+			@ModelAttribute Dictionary dict,
+			@RequestParam(name = "oldName") String oldName,
+			RedirectAttributes rs
+			) {
+		//BDの更新
+		dictService.setDictByDict(dict);
+		
+		rs.addFlashAttribute(
+				"statusMessage", "辞典名「" + oldName + "」を「" 
+						+ dictService.getDictById(dict.getId()).getName() + "」に変更しました。"
+		);
 		return "redirect:/mydictionary/show/all";
 	}
 	

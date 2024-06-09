@@ -18,6 +18,8 @@ public interface DictMapper {
 	Dictionary selectDictById(Integer dictId);
 
 	void deleteDict(Integer dictId);
+
+	void updateDict(Dictionary dict);
 	
 	
 
