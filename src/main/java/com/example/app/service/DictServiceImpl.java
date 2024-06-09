@@ -34,4 +34,10 @@ public class DictServiceImpl implements DictService {
 	public Dictionary getDictById(Integer dictId) {
 		return dictMapper.selectDictById(dictId);
 	}
+
+	@Override
+	public void deleteDictById(Integer dictId) {
+		dictMapper.deleteDict(dictId);
+	}
+
 }

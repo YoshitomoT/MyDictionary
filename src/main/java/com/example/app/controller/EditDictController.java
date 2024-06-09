@@ -59,7 +59,7 @@ public class EditDictController {
 		//削除する辞書の情報を取得
 		Dictionary dict = dictService.getDictById(dictId);
 		//dictionarysテーブルから削除
-		dictService.deleteDictByid(dictId);
+		dictService.deleteDictById(dictId);
 		//dict_wordテーブルから辞典idが合致するカラムを削除
 		dictWordService.deleteDictWordByDictId(dictId);
 		//一覧ページに表示するフラッシュメッセージの格納
