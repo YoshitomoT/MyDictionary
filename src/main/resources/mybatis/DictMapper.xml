@@ -16,7 +16,7 @@
 		GROUP BY 
 		    dictionarys.id, dictionarys.name;
 	</select>
-
+	
 	<select id="selectDictById" parameterType="Integer" resultType="Dictionary">
 		SELECT
 			*
@@ -25,6 +25,7 @@
 		WHERE
 			id = #{dictId}
 	</select>
+
 	<insert id="insertDict" parameterType="Dictionary">
 		INSERT INTO dictionarys (id, name)
 		VALUES (#{id}, #{name})
@@ -35,5 +36,12 @@
 			COUNT(name)
 		FROM 
 			dictionarys;
-	</select>	
+	</select>
+	
+	<delete id="deleteDict" parameterType="Integer">
+		DELETE FROM
+			dictionarys
+		WHERE 
+			id = #{dictId}
+		</delete>	
 </mapper>
