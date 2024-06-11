@@ -16,10 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/mydictionary/show")
 public class ShowController {
 
-    // WordServiceのインスタンスをDI（依存性注入）によって取得します。
     private final WordService wordService;
 	private final DictService dictService;
 
+	
+//================== 単語の一覧表示 ==================
     /**
      * 全単語を表示するメソッド。
      * 
@@ -46,6 +47,8 @@ public class ShowController {
         return "all_words";
     }
 
+    
+//================== 単語の詳細表示 ==================
     /**
      * 指定されたIDと名前に基づいて単語の詳細を表示するメソッド。
      * 
