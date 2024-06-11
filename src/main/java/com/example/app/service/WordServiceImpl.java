@@ -61,8 +61,8 @@ public class WordServiceImpl implements WordService {
 	
 	
 	@Override
-	public void setEditedWord(Word editedWord) {
-		wordMapper.updateWordByEditedWord(editedWord);
+	public void setEditedWord(Word word) {
+		wordMapper.updateWordByEditedWord(word);
 	}
 
 	@Override
@@ -71,8 +71,8 @@ public class WordServiceImpl implements WordService {
 	}
 
 	@Override
-	public void setNewWord(Word addWord) {
-		wordMapper.insertWord(addWord);
+	public void setNewWord(Word word) {
+		wordMapper.insertWord(word);
 	}
 
 	@Override

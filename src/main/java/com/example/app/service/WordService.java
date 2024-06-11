@@ -45,10 +45,10 @@ public interface WordService {
     /**
      * 編集されたWord情報を受け取り単語情報を更新するメソッド。
      *
-     * @param editedWord 更新したい単語のID+更新したい単語情報。
+     * @param word 更新したい単語のID+更新したい単語情報。
      * 
      */
-	void setEditedWord(Word editedWord);
+	void setEditedWord(Word word);
 
 	void deleteWordById(Long WordId);
 	
@@ -59,7 +59,7 @@ public interface WordService {
      * @param addWord 更新したい単語のID+更新したい単語情報。
      * 
      */
-	void setNewWord(Word addWord);
+	void setNewWord(Word word);
 	
     /**
      * 新規単語登録の際、BDに最後に追加した単語のid情報を取得するメソッド。
