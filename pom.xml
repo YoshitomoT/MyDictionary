@@ -63,6 +63,11 @@
 			<version>3.0.3</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- 別途追加：BCrypt -->
+		<dependency>
+			<groupId>de.svenkubiak</groupId>
+			<artifactId>jBCrypt</artifactId>
+			<version>0.4.3</version>
 	</dependencies>
 	<build>
 		<plugins>
