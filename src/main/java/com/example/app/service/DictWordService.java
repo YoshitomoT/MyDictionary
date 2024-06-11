@@ -30,6 +30,8 @@ public interface DictWordService {
      * 
      */
 	void deleteDictWordById(Long WordId);
+
+	void deleteDictWordByDictId(Integer dictId);
 	
 }
 

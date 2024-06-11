@@ -23,7 +23,7 @@ public interface WordMapper {
 
 	void deleteWordById(Long wordId);
 
-	void insertWord(Word addWord);
+	void insertWord(Word word);
 
 	Long selectLastInsertedId();
 
