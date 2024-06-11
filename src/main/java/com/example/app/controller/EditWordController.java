@@ -59,7 +59,7 @@ public class EditWordController {
 		Long newWordId = wordService.getLastInsertedId();
 		
 	    //dictionary_wordテーブルの更新処理（辞書と単語の関連付け処理）
-	    dictWordService.setEditedDictWord(newWordId, addDictIdList);
+	    dictWordService.setDictWord(newWordId, addDictIdList);
 	
 		//フラッシュメッセージの設定
 		rs.addFlashAttribute("statusMessage", "単語「" + addWord.getName() + "」を登録しました。");
@@ -97,7 +97,7 @@ public class EditWordController {
         wordService.setEditedWord(editedWord);
          
 	    //dictionary_Wordテーブルの更新（登録している辞典情報）
-	    dictWordService.setEditedDictWord(editedWord.getId(), editedDictIdList);
+	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
 	    
 	    //フラッシュメッセージの設定
 	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
