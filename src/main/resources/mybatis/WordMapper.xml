@@ -1,14 +1,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.WordMapper">
-	<resultMap type="Word" id="joinedResult" autoMapping="true">
-		<id property="id" column="id" />
-		<collection property="registeredDictList" ofType="Dictionary">
-			<id property="id" column="dictionary_id" />
-			<result property="name" column="dictionary_name"/>
-		</collection>
-	</resultMap>
-	<select id="selectAll" resultMap="joinedResult">
+	
+	<select id="selectAll" resultType="Word">
+		SELECT
+			*
+		FROM
+			words
+	</select>
+	
+	<select id="selectAllWithDict" resultMap="joinedResult">
 		SELECT 
 			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
 		     words.id AS id, words.name AS name, pronunciation, simple_description, detailed_description, reference_url,
@@ -25,8 +26,15 @@
 			dictionary_word.dictionary_id = dictionarys.id
 
 	</select>
+	<resultMap type="Word" id="joinedResult" autoMapping="true">
+		<id property="id" column="id" />
+		<collection property="registeredDictList" ofType="Dictionary">
+			<id property="id" column="dictionary_id" />
+			<result property="name" column="dictionary_name"/>
+		</collection>
+	</resultMap>
 	
-	<select id="selectWordById" parameterType="Integer" resultMap="joinedResult">
+	<select id="selectWordById" parameterType="Long" resultMap="joinedResult">
 		SELECT 
 			 dictionarys.id AS dictionary_id, dictionarys.name AS dictionary_name,
 		     words.id AS id, words.name AS name, pronunciation, simple_description, detailed_description, reference_url,
@@ -45,7 +53,7 @@
 			words.id = #{id}
 	</select>
 	
-	<update id="incrementPageViews" parameterType="Integer">
+	<update id="incrementPageViews" parameterType="Long">
 		UPDATE 
 			words 
 		SET 
@@ -54,14 +62,54 @@
 			id = #{id};
 	</update>
 	
-	<update id="updateLastViewById" parameterType="Integer">
+	<update id="updateWordLastViewedById" parameterType="Long">
 		UPDATE 
 			words 
 		SET 
 			last_view_at = CURRENT_TIMESTAMP
 		WHERE 
-			id = #{id};
+			id = #{id}
 	</update>
+	
+	<update id="updateWordByEditedWord" parameterType="Word">
+		UPDATE 
+			words
+		SET 
+			pronunciation = #{pronunciation},
+		    simple_description = #{simpleDescription},
+		    detailed_description = #{detailedDescription},
+		    reference_url = #{referenceUrl},
+		    updated_at = CURRENT_TIMESTAMP
+		WHERE 
+			id = #{id}
+	</update>
+	
+	<delete id="deleteWordById" parameterType="Long">
+		DELETE FROM
+			words
+		WHERE 
+			id = #{id}
+	</delete>
+	
+	<insert id="insertWord" parameterType="Word">
+		INSERT INTO 
+			words (`name`, `pronunciation`, `simple_description`, `detailed_description`, `reference_url`) 
+		VALUES
+			(#{name}, #{pronunciation}, #{simpleDescription}, #{detailedDescription}, #{referenceUrl})
+	
+	</insert>
+	
+	<select id="selectLastInsertedId" resultType="Long">
+		SELECT 
+			LAST_INSERT_ID()
+	</select>
+	
+	<select id="countTotalWords" resultType="int">
+		SELECT 
+			COUNT(id) AS total_words
+		FROM 
+			words
+	</select>
 	
 		
 </mapper>

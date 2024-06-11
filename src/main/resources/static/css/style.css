@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+/* ページ全体のスタイル */
+body {
+    font-family: Arial, sans-serif; /* フォント指定 */
+    line-height: 1.6; /* 行の高さ */
+    margin: 0; /* 余白を0に */
+    padding: 0; /* パディングを0に */
+}
+
+/* 見出しのスタイル */
+h1 {
+    display: flex;
+    align-items: baseline; /* Baseline alignment to keep text inline */
+}
+
+h1 small {
+    font-size: 0.5em; /* Adjust the size to be smaller */
+}
+
+/* テーブルのスタイル */
+table {
+    width: 100%; /* テーブル幅を100%に */
+    border-collapse: collapse; /* ボーダーを丸く */
+    margin-bottom: 20px; /* テーブルの下に余白を設定 */
+}
+
+/* テーブルの見出しセルのスタイル */
+th {
+    background-color: #f2f2f2; /* 背景色 */
+    padding: 8px; /* 内側の余白 */
+    text-align: left; /* 文字を左寄せ */
+}
+
+/* テーブルのデータセルのスタイル */
+td {
+    border: 1px solid #dddddd; /* ボーダー */
+    padding: 8px; /* 内側の余白 */
+}
+
+/* リンクのスタイル */
+a {
+    color: #007bff; /* リンクの色 */
+    text-decoration: none; /* 下線をなくす */
+}
+
+a:hover {
+    text-decoration: underline; /* マウスホバー時に下線を表示 */
+}
+
+/* ページ内のパラグラフのスタイル */
+p {
+    margin-bottom: 10px; /* パラグラフの下に余白を設定 */
+}

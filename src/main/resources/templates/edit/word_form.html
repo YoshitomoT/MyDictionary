@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>[[${pageTitle}]]</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<h1>---[[${pageTitle}]]---</h1>
+
+	<th:block th:object="${word}">
+		<form th:action="@{/mydictionary/word/register}" method="post">
+		<!-- <form th:action="@{/mydictionary/word/confirm(id=*{id}, name=*{name})}" method="get"> -->
+		
+		
+<!-- **********変更不可のフィールドは表示した内容そのままを送信パラメーターの値とする　************* -->	
+			<!-- ID 
+				単語名
+				登録日時
+				更新日時
+				最終閲覧の日時
+				閲覧回数
+			-->
+			
+			<input type="hidden" th:field="*{id}" />	
+    		<input type="hidden" th:field="*{name}" />
+    		<input type="hidden" th:field="*{registeredAt}" />
+    		<input type="hidden" th:field="*{updatedAt}" />
+    		<input type="hidden" th:field="*{lastViewAt}" />
+    		<input type="hidden" th:field="*{pageViews}" />
+    		
+<!-- ***************************************************************** -->	
+			<h1>
+				[[*{name}]]
+				<small>(読み方：<input type="text" th:field="*{pronunciation}" />)</small>
+			</h1>
+
+			<hr>
+
+			<br>
+			<table border="1">
+				<tr>
+					<th>登録している辞典</th>
+					<td>
+						<th:block th:each="dict, status : ${dictList}">
+							<th:block th:if="${dict.id != 99}">
+									<input type="checkbox" name="registeredDictIdList"
+										th:value="${dict.id}"
+										th:checked="${word.registeredDictList.contains(dict)}">[[${status.index + 1}]].[[${dict.name}]]
+	    					</th:block>
+		    			</th:block>
+    				</td>
+				</tr>
+				                               
+				<tr>
+					<th>シンプル意味</th>
+					<td><input type="text" th:field="*{simpleDescription}" /></td>
+				</tr>
+				<tr>
+					<th>詳細</th>
+					<td><textarea th:field="*{detailedDescription}" rows="6"
+							style="width: 300px;"></textarea></td>
+				</tr>
+				<tr>
+					<th>参照</th>
+					<td><input type="text" th:field="*{referenceUrl}" /></td>
+				</tr>
+			</table>
+			<input type="submit" value="送信">
+		</form>
+
+		<p>単語登録日：[[*{#temporals.format(registeredAt, 'yyyy/MM/dd
+			HH:mm:ss')}]]</p>
+		<p>更新日：[[*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
+		<p>最終閲覧日:[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd
+			HH:mm:ss')}]]</p>
+		<p>[[*{pageViews}]]回閲覧</p>
+	</th:block>
+	<p>
+		<a th:href="@{/mydictionary/show/all}">一覧に戻る</a>
+	</p>
+
+</body>
+</html>
