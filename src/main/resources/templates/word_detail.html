@@ -7,7 +7,12 @@
 </head>
 <body>
 	<th:block th:object=${word}>
-		<h1>[[*{name}]]<small>(読み方：[[*{pronunciation}]])</small></h1>
+		<h1>[[*{name}]]
+			<small th:if="*{pronunciation} != null and *{pronunciation} != ''">
+			(読み方：[[*{pronunciation}]])
+			</small>
+
+		</h1>
 		<hr>
 		
 		<br>
