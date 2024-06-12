@@ -28,9 +28,14 @@
 			id = #{dictId}
 	</select>
 
-	<insert id="insertDict" parameterType="Dictionary">
-		INSERT INTO dictionarys (id, name)
-		VALUES (#{id}, #{name})
+	<insert id="insertDict" parameterType="map">
+		INSERT INTO
+			 dictionarys (`user_id`, `id`, `name`)
+		VALUES (
+			#{userId},
+			#{dict.id}, 
+			#{dict.name}
+		)
 	</insert>
 	
 	<select id="countDict" resultType="int">

@@ -9,7 +9,7 @@ public interface DictService {
 	
 	List<Dictionary> getAll(Integer userId);
 
-	void registerDict(Dictionary addDict);
+	void registerDict(Integer userId, Dictionary dict);
 
 	Dictionary getDictById(Integer dictId);
 

@@ -3,6 +3,7 @@ package com.example.app.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.app.domain.Word;
 
@@ -23,7 +24,7 @@ public interface WordMapper {
 
 	void deleteWordById(Long wordId);
 
-	void insertWord(Word word);
+	void insertWord(@Param("userId") Integer userId, @Param("word") Word word);
 
 	Long selectLastInsertedId();
 
