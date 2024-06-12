@@ -73,11 +73,13 @@ public class EditWordController {
 	
 	//単語の編集フォーム表示用のメソッド
     @GetMapping("/edit")
-    public String editWordForm(@RequestParam Long id, Model model) {
+    public String editWordForm(@RequestParam Long id, Model model, HttpSession session) {
+       	// セッションからログインユーザーのIDを取得
+    	Integer userId = (Integer) session.getAttribute("userId");
         Word word = wordService.getWordById(id);
         model.addAttribute("pageTitle", "単語の編集");
         model.addAttribute("word", word);
-        model.addAttribute("dictList", dictService.getAll());
+        model.addAttribute("dictList", dictService.getAll(userId));
         return "edit/word_form";
     }
 
