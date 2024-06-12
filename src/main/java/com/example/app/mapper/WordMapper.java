@@ -9,7 +9,7 @@ import com.example.app.domain.Word;
 @Mapper
 public interface WordMapper {
 	
-	List<Word> selectAll();
+	List<Word> selectAll(Integer userId);
 	
 	List<Word> selectAllWithDict();
 
@@ -27,7 +27,7 @@ public interface WordMapper {
 
 	Long selectLastInsertedId();
 
-	int countTotalWords();
+	int countTotalWords(Integer userId);
 
 
 	
