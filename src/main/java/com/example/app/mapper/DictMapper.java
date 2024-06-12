@@ -9,7 +9,7 @@ import com.example.app.domain.Dictionary;
 @Mapper
 public interface DictMapper {
 
-	List<Dictionary> selectAll();
+	List<Dictionary> selectAll(Integer userId);
 
 	void insertDict(Dictionary addDict);
 
