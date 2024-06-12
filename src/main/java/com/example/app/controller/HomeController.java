@@ -36,7 +36,9 @@ public class HomeController {
 			return "home";
 		}
 		
-		session.setAttribute("user", user);
+		user.setId(userService.getIdByUser(user));
+		session.setAttribute("userId", userService.getIdByUser(user));
+		System.out.println("ログイン情報" + user);
 		return "redirect:/mydictionary/show/all";
 		
 	}

@@ -7,9 +7,9 @@ import com.example.app.domain.Dictionary;
 
 public interface DictService {
 	
-	List<Dictionary> getAll();
+	List<Dictionary> getAll(Integer userId);
 
-	void registerDict(Dictionary addDict);
+	void registerDict(Integer userId, Dictionary dict);
 
 	Dictionary getDictById(Integer dictId);
 
