@@ -93,11 +93,17 @@
 			id = #{id}
 	</delete>
 	
-	<insert id="insertWord" parameterType="Word">
+	<insert id="insertWord" parameterType="map">
 		INSERT INTO 
-			words (`name`, `pronunciation`, `simple_description`, `detailed_description`, `reference_url`) 
-		VALUES
-			(#{name}, #{pronunciation}, #{simpleDescription}, #{detailedDescription}, #{referenceUrl})
+			words (`user_id`, `name`, `pronunciation`, `simple_description`, `detailed_description`, `reference_url`) 
+		VALUES(
+			#{userId},
+	        #{word.name},
+	        #{word.pronunciation},
+	        #{word.simpleDescription},
+	        #{word.detailedDescription},
+	        #{word.referenceUrl}
+		)
 	
 	</insert>
 	
