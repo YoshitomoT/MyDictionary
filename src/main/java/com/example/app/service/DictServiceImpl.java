@@ -16,8 +16,8 @@ public class DictServiceImpl implements DictService {
 	private final DictMapper dictMapper;
 
 	@Override
-	public List<Dictionary> getAll() {
-		return dictMapper.selectAll();
+	public List<Dictionary> getAll(Integer userId) {
+		return dictMapper.selectAll(userId);
 	}
 
 	@Override

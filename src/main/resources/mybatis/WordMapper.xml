@@ -2,11 +2,13 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.WordMapper">
 	
-	<select id="selectAll" resultType="Word">
-		SELECT
-			*
-		FROM
+	<select id="selectAll" parameterType="Integer" resultType="Word">
+		SELECT 
+			* 
+		FROM 
 			words
+		WHERE 
+			user_id = #{userId}
 	</select>
 	
 	<select id="selectAllWithDict" resultMap="joinedResult">
@@ -105,10 +107,12 @@
 	</select>
 	
 	<select id="countTotalWords" resultType="int">
-		SELECT 
-			COUNT(id) AS total_words
-		FROM 
-			words
+	SELECT
+		COUNT(id) AS total_words
+	FROM
+		words
+	WHERE
+		user_id = #{userId}
 	</select>
 	
 		

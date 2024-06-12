@@ -13,10 +13,12 @@
 		    dictionary_word
 		ON 
 		    dictionarys.id = dictionary_word.dictionary_id
+		WHERE
+		    dictionarys.user_id = #{userId}
 		GROUP BY 
 		    dictionarys.id, dictionarys.name;
-	</select>
-	
+		</select>
+		    
 	<select id="selectDictById" parameterType="Integer" resultType="Dictionary">
 		SELECT
 			*
