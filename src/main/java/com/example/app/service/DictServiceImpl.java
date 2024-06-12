@@ -17,16 +17,18 @@ public class DictServiceImpl implements DictService {
 
 	@Override
 	public List<Dictionary> getAll(Integer userId) {
-		return dictMapper.selectAll(userId);
+			List<Dictionary> dictList = dictMapper.selectAll(userId);
+			dictList.add(dictMapper.selectDictById(99));
+		return dictList;
 	}
 
 	@Override
-	public void registerDict(Dictionary addDict) {
+	public void registerDict(Integer userId, Dictionary dict) {
 		
 		//その他辞典を最後にする形でidをインクリメントしたいから現在のカラム数を新規登録する辞典のid番号にする
 		int addId = dictMapper.countDict();
-		addDict.setId(addId);
-		dictMapper.insertDict(addDict);
+		dict.setId(addId);
+		dictMapper.insertDict(userId, dict);
 		
 	}
 
