@@ -1,6 +1,5 @@
 package com.example.app.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,23 +18,17 @@ public class WordServiceImpl implements WordService {
 	
 
 	@Override
-	public List<Word> getAll() {
+	public List<Word> getAll(Integer userId) {
 		
-		List<Word> wordList = wordMapper.selectAll();
-		List<Long> wordIdListWithDictInfo = dictWordService.getWordId();
-//		System.out.println("テスト：wordList->" + wordList);
-//		System.out.println("テスト：wordIdListWithDictInfo->" + wordIdListWithDictInfo);
-		
-		List<Integer> DictId = new ArrayList<>();
-		DictId.add(0, 99);
-		
-		for (Word word : wordList) {
-			if (!wordIdListWithDictInfo.contains(word.getId())) {
-				dictWordService.setDictWord(word.getId(), DictId);
-			}
-		}
-		
-		return wordMapper.selectAllWithDict();
+	    // 単語のリストを取得
+	    List<Word> wordList = wordMapper.selectAll(userId);
+
+	    // 各単語に対応する辞書情報を付加
+	    for (Word word : wordList) {
+	        word.setRegisteredDictList(dictWordService.getDictListByWordId(word.getId()));
+	    }
+
+	    return wordList;
 	}
 
 	@Override
@@ -81,8 +74,8 @@ public class WordServiceImpl implements WordService {
 	}
 
 	@Override
-	public int getTotalWords() {
-		return wordMapper.countTotalWords();
+	public int getTotalWords(Integer userId) {
+		return wordMapper.countTotalWords(userId);
 	}
 
 	

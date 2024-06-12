@@ -12,10 +12,11 @@ public interface WordService {
     
     /**
      * 登録されているすべての単語を取得するメソッド。
+     * @param userId 
      * 
      * @return 単語のリスト。
      */
-    List<Word> getAll();
+    List<Word> getAll(Integer userId);
 
     /**
      * 指定されたIDに基づいて単語を取得するメソッド。
@@ -71,11 +72,12 @@ public interface WordService {
 	
     /**
      * 登録している全単語数を取得するメソッド。
+     * @param userId 
      *
      * @return 登録している全単語数
      * 
      */
-	int getTotalWords();
+	int getTotalWords(Integer userId);
 	
 	
 
