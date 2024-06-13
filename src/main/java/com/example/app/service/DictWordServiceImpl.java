@@ -34,6 +34,12 @@ public class DictWordServiceImpl implements DictWordService {
 			
 		}
 	}
+	
+	@Override
+	public void setDictWord(Long wordId, Integer dictId) {
+		dictWordMapper.insertDictWordByWordIdAndDictId(wordId, dictId);
+		
+	}
 
 	@Override
 	public void deleteDictWordById(Long WordId) {
@@ -52,6 +58,7 @@ public class DictWordServiceImpl implements DictWordService {
 		
 		return dictWordMapper.selectDictListByWordId(wordId);
 	}
+
 
 
 

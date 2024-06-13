@@ -59,6 +59,7 @@ public class EditWordController {
 		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (addDictIdList == null) {
 	        addDictIdList = new ArrayList<>();
+	        addDictIdList.add(99);
 	    }
 	    
 		//Wordsテーブルに単語を登録
@@ -101,6 +102,7 @@ public class EditWordController {
 		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (editedDictIdList == null) {
 	    	editedDictIdList = new ArrayList<>();
+	    	editedDictIdList.add(99);
 	    }
 
 		//Wordテーブルの更新処理（登録している辞典情報以外の情報）
