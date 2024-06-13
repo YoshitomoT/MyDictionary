@@ -28,6 +28,8 @@ public interface DictWordService {
 
 
 	List<Dictionary> getDictListByWordId(Long Word);
+
+	void setDictWord(Long wordId, Integer dictId);
 	
 }
 

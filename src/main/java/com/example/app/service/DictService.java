@@ -16,5 +16,7 @@ public interface DictService {
 	void deleteDictById(Integer dictId);
 
 	void setDictByDict(Dictionary dict);
+	
+	List<Dictionary> setDefaultDict(List<Dictionary> dictList, Integer userId, Integer dictId);
 
 }

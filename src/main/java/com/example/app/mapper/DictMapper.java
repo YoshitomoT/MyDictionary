@@ -22,6 +22,9 @@ public interface DictMapper {
 	void deleteDict(Integer dictId);
 
 	void updateDict(Dictionary dict);
+
+	Dictionary selectDefaultDictById(@Param("userId")Integer userId, @Param("dictId") Integer dictId);
+
 	
 	
 
