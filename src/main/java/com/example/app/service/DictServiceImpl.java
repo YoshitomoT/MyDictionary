@@ -18,7 +18,8 @@ public class DictServiceImpl implements DictService {
 	@Override
 	public List<Dictionary> getAll(Integer userId) {
 			List<Dictionary> dictList = dictMapper.selectAll(userId);
-			dictList.add(dictMapper.selectDictById(99));
+			setDefaultDict(dictList, userId, 99);
+			System.out.println("dictList->" + dictList);
 		return dictList;
 	}
 
@@ -45,6 +46,12 @@ public class DictServiceImpl implements DictService {
 	@Override
 	public void setDictByDict(Dictionary dict) {
 		dictMapper.updateDict(dict);
+	}
+
+	@Override
+	public List<Dictionary> setDefaultDict(List<Dictionary> dictList, Integer userId, Integer dictId) {
+		dictList.add(dictMapper.selectDefaultDictById(userId, 99));
+		return dictList;
 	}
 
 }
