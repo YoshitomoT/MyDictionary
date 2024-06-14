@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Word;
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.DictWordService;
 import com.example.app.service.WordService;
@@ -36,8 +37,9 @@ public class EditWordController {
     @GetMapping("/add")
     public String addWordForm(Model model, HttpSession session) {
     	
-       	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
     	model.addAttribute("pageTitle", "新規単語登録");
     	model.addAttribute("word", new Word());
     	model.addAttribute("dictList", dictService.getAll(userId));
@@ -53,8 +55,8 @@ public class EditWordController {
 			RedirectAttributes rs
 			) {
 		
-       	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
 		
 		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (addDictIdList == null) {
@@ -83,8 +85,9 @@ public class EditWordController {
 	//単語の編集フォーム表示用のメソッド
     @GetMapping("/edit")
     public String editWordForm(@RequestParam Long id, Model model, HttpSession session) {
-       	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
         Word word = wordService.getWordById(id);
         model.addAttribute("pageTitle", "単語の編集");
         model.addAttribute("word", word);
