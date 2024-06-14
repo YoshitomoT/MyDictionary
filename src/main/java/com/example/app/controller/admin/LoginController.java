@@ -58,3 +58,14 @@ public class LoginController {
         // ログアウト後にホームページにリダイレクト
         return "redirect:/login";
     }
+	
+	@GetMapping("/timeout")
+	public String timeout() {
+		return "timeout";
+	}
+	
+	
+	
+	
+
+}
