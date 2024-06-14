@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.WordService;
 
@@ -33,7 +34,7 @@ public class ShowController {
     public String showAllWordList(Model model,HttpSession session) {
     	
     	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
     	
         // すべての単語の情報をリストで取得し、モデルに格納
         model.addAttribute("wordList", wordService.getAll(userId));
