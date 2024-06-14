@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.WordService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -29,20 +31,20 @@ public class ShowController {
      */
     
     @GetMapping("/all")
-    public String showAlls(Model model) {
-
+    public String showAllWordList(Model model,HttpSession session) {
+    	
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
         // すべての単語の情報をリストで取得し、モデルに格納
-        model.addAttribute("wordList", wordService.getAll());
-        //System.out.println(wordService.getAll());	//確認
+        model.addAttribute("wordList", wordService.getAll(userId));
         
         //登録している全単語数を取得し、モデルに格納
-        model.addAttribute("totalWords", wordService.getTotalWords());
-        
-        
+        model.addAttribute("totalWords", wordService.getTotalWords(userId));
+          
         //すべての辞典の情報をリストで取得し、モデルに格納
-        model.addAttribute("dictList", dictService.getAll());
-        System.out.println("辞典情報->" + dictService.getAll());	//確認用
-        
+        model.addAttribute("dictList", dictService.getAll(userId));
+
         // "all_words"ビューを返します。
         return "all_words";
     }

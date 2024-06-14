@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Word;
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.DictWordService;
 import com.example.app.service.WordService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -33,28 +35,37 @@ public class EditWordController {
 	
 	//単語の新規登録フォーム表示のメソッド
     @GetMapping("/add")
-    public String addWordForm(Model model) {
+    public String addWordForm(Model model, HttpSession session) {
+    	
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
     	model.addAttribute("pageTitle", "新規単語登録");
     	model.addAttribute("word", new Word());
-    	model.addAttribute("dictList", dictService.getAll());
+    	model.addAttribute("dictList", dictService.getAll(userId));
     	return "edit/add_word_form";
     }
     
     //単語の新規登録処理用メソッド
 	@PostMapping("/add")
 	public String registerAddWord(
-			@ModelAttribute Word addWord,
+			@ModelAttribute Word word,
 			@RequestParam(name ="registeredDictIdList", required = false) List<Integer> addDictIdList,
+			HttpSession session,
 			RedirectAttributes rs
 			) {
+		
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
 		
 		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (addDictIdList == null) {
 	        addDictIdList = new ArrayList<>();
+	        addDictIdList.add(99);
 	    }
 	    
 		//Wordsテーブルに単語を登録
-		wordService.setNewWord(addWord);
+		wordService.setNewWord(userId, word);
 		//新規登録した単語のID情報を取得
 		Long newWordId = wordService.getLastInsertedId();
 		
@@ -62,7 +73,7 @@ public class EditWordController {
 	    dictWordService.setDictWord(newWordId, addDictIdList);
 	
 		//フラッシュメッセージの設定
-		rs.addFlashAttribute("statusMessage", "単語「" + addWord.getName() + "」を登録しました。");
+		rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を登録しました。");
 		
 		// リダイレクト先を指定
 		return "redirect:/mydictionary/show/all"; 
@@ -73,11 +84,14 @@ public class EditWordController {
 	
 	//単語の編集フォーム表示用のメソッド
     @GetMapping("/edit")
-    public String editWordForm(@RequestParam Long id, Model model) {
+    public String editWordForm(@RequestParam Long id, Model model, HttpSession session) {
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
         Word word = wordService.getWordById(id);
         model.addAttribute("pageTitle", "単語の編集");
         model.addAttribute("word", word);
-        model.addAttribute("dictList", dictService.getAll());
+        model.addAttribute("dictList", dictService.getAll(userId));
         return "edit/word_form";
     }
 
@@ -91,6 +105,7 @@ public class EditWordController {
 		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (editedDictIdList == null) {
 	    	editedDictIdList = new ArrayList<>();
+	    	editedDictIdList.add(99);
 	    }
 
 		//Wordテーブルの更新処理（登録している辞典情報以外の情報）

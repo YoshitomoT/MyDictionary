@@ -2,7 +2,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.app.mapper.DictWordMapper">
 	
-	<select id="selectWordIdWithDictInfo" resultType="Long">
+<!-- 	<select id="selectWordIdWithDictInfo" resultType="Long">
 	SELECT 
 		word_id
 	FROM 
@@ -11,6 +11,19 @@
 		word_id
 	ORDER BY 
 		word_id ASC
+	</select> -->
+	
+	<select id="selectDictListByWordId" parameterType="Long" resultType="Dictionary">
+		SELECT 
+			dictionary_id AS id, dictionarys.name AS name
+		FROM
+			dictionary_word
+		JOIN 
+			dictionarys
+		ON 
+			dictionary_id = dictionarys.id
+		WHERE 
+			word_id = #{wordId}
 	</select>
 	
 	
