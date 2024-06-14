@@ -10,8 +10,8 @@
     <h1>---[[${pageTitle}]]---</h1>
 
     <th:block th:object="${dict}">
-        <form th:action="@{/mydictionary/dictionary/edit}" method="post">
-        <!-- <form th:action="@{/mydictionary/word/confirm(id=*{id}, name=*{name})}" method="get"> -->
+        <form th:action="@{/myshoko/dictionary/edit}" method="post">
+        <!-- <form th:action="@{/myshoko/word/confirm(id=*{id}, name=*{name})}" method="get"> -->
         
         
 <!-- **********変更不可のフィールドは表示した内容そのままを送信パラメーターの値とする　************* -->    
@@ -36,7 +36,7 @@
         </form>
     </th:block>
     <p>
-        <a th:href="@{/mydictionary/show/all}">一覧に戻る</a>
+        <a th:href="@{/myshoko/show/allwords}">一覧に戻る</a>
     </p>
 
 </body>

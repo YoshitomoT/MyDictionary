@@ -46,7 +46,7 @@ public class LoginController {
 		
 		session.setAttribute("user", userSessionDTO);
 		System.out.println("ログイン情報" + userSessionDTO);
-		return "redirect:/mydictionary/show/all";
+		return "redirect:/mysyoko/show/allwords";
 		
 	}
 	

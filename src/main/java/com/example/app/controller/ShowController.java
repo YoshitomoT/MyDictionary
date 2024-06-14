@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mydictionary/show")
+@RequestMapping("/mysyoko/show")
 public class ShowController {
 
     private final WordService wordService;
@@ -30,7 +30,7 @@ public class ShowController {
      * @return 表示するビューの名前（"all_words"）。
      */
     
-    @GetMapping("/all")
+    @GetMapping("/allwords")
     public String showAllWordList(Model model,HttpSession session) {
     	
     	// セッションからログインユーザーのIDを取得
