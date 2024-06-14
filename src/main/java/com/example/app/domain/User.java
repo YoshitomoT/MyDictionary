@@ -11,7 +11,7 @@ public class User {
 	private String userName;
 	
 	//パスワード
-	private String password;
+	private String hashedPassword;
 	
 	
 

@@ -8,8 +8,8 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
-        
+        <h2>My辞典</h2>
+        <p th:if="${errorMessage}">[[${errorMessage}]]</p>
         <form th:action="@{/login}" method="POST">
         	<th:block th:object="${user}">
 				<div class="form-group">
@@ -23,6 +23,11 @@
 				<button type="submit">Login</button>
 			</th:block>
         </form>
+
+        <!-- 新規登録リンクを追加 -->
+        <div class="register-link">
+            <a th:href="@{/registerUser}">登録がない方はこちら</a>
+        </div>
     </div>
 </body>
 </html>

@@ -113,12 +113,12 @@
 	</select>
 	
 	<select id="countTotalWords" resultType="int">
-	SELECT
-		COUNT(id) AS total_words
-	FROM
-		words
-	WHERE
-		user_id = #{userId}
+		SELECT
+			COUNT(id) AS total_words
+		FROM
+			words
+		WHERE
+			user_id = #{userId}
 	</select>
 	
 		

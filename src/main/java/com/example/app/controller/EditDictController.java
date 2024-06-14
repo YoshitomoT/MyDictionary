@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Dictionary;
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.DictWordService;
 
@@ -29,8 +30,8 @@ public class EditDictController {
 			Model model,
 			HttpSession session
 	) {
-       	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
 
 		model.addAttribute("dictList", dictService.getAll(userId));
 		model.addAttribute("dictionary", new Dictionary());
@@ -46,8 +47,8 @@ public class EditDictController {
 			RedirectAttributes rs
 			) {
 		
-       	// セッションからログインユーザーのIDを取得
-    	Integer userId = (Integer) session.getAttribute("userId");
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
 		dictService.registerDict(userId, addDict);
 		
 		//一覧ページに表示するフラッシュメッセージの格納
