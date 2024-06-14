@@ -1,0 +1,27 @@
+package com.example.app.controller.admin;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.example.app.dto.LoginFormDTO;
+import com.example.app.dto.UserSessionDTO;
+import com.example.app.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+public class LoginController {
+	
+	private final UserService userService;
+	
+	@GetMapping("/login")
+	public String showLoginForm(Model model) {
+		model.addAttribute("user", new LoginFormDTO());
+		return "login";
+	}
