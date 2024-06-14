@@ -49,3 +49,12 @@ public class LoginController {
 		return "redirect:/mydictionary/show/all";
 		
 	}
+	
+	@PostMapping("/logout")
+    public String logout(HttpSession session) {
+        // セッションを無効化する
+        session.invalidate();
+
+        // ログアウト後にホームページにリダイレクト
+        return "redirect:/login";
+    }
