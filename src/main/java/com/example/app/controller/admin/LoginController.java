@@ -25,3 +25,27 @@ public class LoginController {
 		model.addAttribute("user", new LoginFormDTO());
 		return "login";
 	}
+	
+	@PostMapping("/login")
+	public String login(
+		@ModelAttribute LoginFormDTO loginForm,
+		Model model,
+		RedirectAttributes rs,
+		HttpSession session
+	) {
+		
+		//ログイン認証
+		UserSessionDTO userSessionDTO = userService.authenticateUser(loginForm);
+
+		//ログイン失敗時
+		if(userSessionDTO == null) {
+			model.addAttribute("user", new LoginFormDTO());
+			rs.addFlashAttribute("errorMessage", "※ユーザー名かパスワードが違います。");
+			return "redirect:/login";
+		}
+		
+		session.setAttribute("user", userSessionDTO);
+		System.out.println("ログイン情報" + userSessionDTO);
+		return "redirect:/mydictionary/show/all";
+		
+	}
