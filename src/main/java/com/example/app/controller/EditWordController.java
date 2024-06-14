@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.domain.Word;
+import com.example.app.dto.UserSessionDTO;
 import com.example.app.service.DictService;
 import com.example.app.service.DictWordService;
 import com.example.app.service.WordService;
@@ -28,117 +29,92 @@ public class EditWordController {
     private final WordService wordService;
     private final DictService dictService;
 	private final DictWordService dictWordService;
+
 	
-
-    
-
-
-	@GetMapping({"/add", "/edit"})
-    public String editWordForm(
-    		@RequestParam(required = false) Long id,
-    		HttpSession session,
-    		Model model
-    ) {
-		
-		Word word = new Word();
-		
-		//idがある　【単語の編集】　/　idがない　【単語の新規登録】
-        if (id != null) {
-   
-//        	//idが不正の場合、リダイレクト
-//        	if (id > wordService.getAll().size()) {
-//        		System.out.println(wordService.getAll().size() + "しかないよ");
-//        		return "redirect:/mydictionary/show/all";
-//        	}
-        	
-        	//idが問題ない場合、該当のidのword情報を受け取る
-        	model.addAttribute("pageTitle", "単語の編集");
-        	word = wordService.getWordById(id);
-        	
-        } else {
-        	model.addAttribute("pageTitle", "新規単語登録");
-        	System.out.println(word);	//デバック用
-        	model.addAttribute("word", word);
-	        model.addAttribute("dictList", dictService.getAll());
-	        return "edit/add_word_form";
-	        
-        }
-        
-	        //word_form表示用
-	        model.addAttribute("word", word);
-	        model.addAttribute("dictList", dictService.getAll());
-	        
-//	        System.out.println("**************【チェック】単語編集ページ表示前*******************");
-//	        System.out.println("dictService.getAll()->" + dictService.getAll());
-//          System.out.println("word->" + word);
-//          System.out.println("********************************************************");
-
-        // 新規追加と編集の両方で同じフォームを使うので、一つのフォームを表示する
-        return "edit/word_form";
+//================== 単語の新規登録 ==================
+	
+	//単語の新規登録フォーム表示のメソッド
+    @GetMapping("/add")
+    public String addWordForm(Model model, HttpSession session) {
+    	
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
+    	model.addAttribute("pageTitle", "新規単語登録");
+    	model.addAttribute("word", new Word());
+    	model.addAttribute("dictList", dictService.getAll(userId));
+    	return "edit/add_word_form";
     }
-
-	
-//	編集した単語の登録を行うメソッド
+    
+    //単語の新規登録処理用メソッド
 	@PostMapping("/add")
 	public String registerAddWord(
-			@ModelAttribute Word addWord,
+			@ModelAttribute Word word,
 			@RequestParam(name ="registeredDictIdList", required = false) List<Integer> addDictIdList,
+			HttpSession session,
 			RedirectAttributes rs
 			) {
 		
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+		
+		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (addDictIdList == null) {
 	        addDictIdList = new ArrayList<>();
+	        addDictIdList.add(99);
 	    }
-		
-		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
-		System.out.println("addDictIdList->" + addDictIdList);
-		System.out.println("addWord->" + addWord);
-		System.out.println("***********************************************************");
-		
-		//Wordsテーブルの更新処理(単語の追加)
-		wordService.setNewWord(addWord);
-		//dictionary_wordテーブルの更新に必要な新規登録した単語のID情報を取得
+	    
+		//Wordsテーブルに単語を登録
+		wordService.setNewWord(userId, word);
+		//新規登録した単語のID情報を取得
 		Long newWordId = wordService.getLastInsertedId();
 		
-		System.out.println("newWordId->" + newWordId);	//デバック用
-		
-	    //dictionary_wordテーブルの更新処理（単語が登録している辞典情報）
+	    //dictionary_wordテーブルの更新処理（辞書と単語の関連付け処理）
 	    dictWordService.setDictWord(newWordId, addDictIdList);
 	
-		//一覧ページに表示するフラッシュメッセージの格納
-		rs.addFlashAttribute("statusMessage", "単語「" + addWord.getName() + "」を登録しました。");
+		//フラッシュメッセージの設定
+		rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を登録しました。");
 		
 		// リダイレクト先を指定
 		return "redirect:/mydictionary/show/all"; 
 	}
+
 	
+//================== 単語の編集 ================== 
 	
-//	編集した単語の登録を行うメソッド
+	//単語の編集フォーム表示用のメソッド
+    @GetMapping("/edit")
+    public String editWordForm(@RequestParam Long id, Model model, HttpSession session) {
+    	// セッションからログインユーザーのIDを取得
+    	Integer userId = ((UserSessionDTO) session.getAttribute("user")).getUserId();
+    	
+        Word word = wordService.getWordById(id);
+        model.addAttribute("pageTitle", "単語の編集");
+        model.addAttribute("word", word);
+        model.addAttribute("dictList", dictService.getAll(userId));
+        return "edit/word_form";
+    }
+
+    //編集した単語の登録を行うメソッド
 	@PostMapping("/register")
 	public String registerEditedWord(
 			@ModelAttribute Word editedWord,
 			@RequestParam(name ="registeredDictIdList", required = false) List<Integer> editedDictIdList,
 			RedirectAttributes rs
 	) {
-		
+		//登録辞書IDリストがnullの場合は空リストを初期化
 	    if (editedDictIdList == null) {
 	    	editedDictIdList = new ArrayList<>();
+	    	editedDictIdList.add(99);
 	    }
-		
-		
-		System.out.println("**************【チェック】編集ページからのパラメーター*******************");
-		System.out.println("editedDictIdList->" + editedDictIdList);
-		System.out.println("editedWord->" + editedWord);
-        System.out.println("***********************************************************");
-        
-		//Wordテーブル（登録している辞典以外の情報）の更新処理
+
+		//Wordテーブルの更新処理（登録している辞典情報以外の情報）
         wordService.setEditedWord(editedWord);
-        
-	    
-	    //Wordｓテーブル（登録している辞典の情報）の更新
+         
+	    //dictionary_Wordテーブルの更新（登録している辞典情報）
 	    dictWordService.setDictWord(editedWord.getId(), editedDictIdList);
 	    
-	    //一覧ページに表示するフラッシュメッセージの格納
+	    //フラッシュメッセージの設定
 	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
 	    
 	    // リダイレクト先を指定
@@ -146,8 +122,9 @@ public class EditWordController {
 	}
 
 	
+//================== 単語の削除==================	
 	
-//	単語の削除を行うメソッド
+	//単語の削除を行うメソッド
     @GetMapping("/delete")
     public String deleteWord(
     		@RequestParam(required = false) Long id,
@@ -162,12 +139,10 @@ public class EditWordController {
     	// Wordsテーブル内、単語が登録している辞典の情報の削除
     	dictWordService.deleteDictWordById(id);
     	
-    	
     	//一覧ページに表示するフラッシュメッセージの格納
 	    rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を削除しました。");
     	
     	//リダイレクト先を指定
 	    return "redirect:/mydictionary/show/all"; 
 	}
-
 }

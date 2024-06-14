@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.app.domain.Dictionary;
 import com.example.app.mapper.DictWordMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -14,10 +15,10 @@ public class DictWordServiceImpl implements DictWordService {
 	
 	private final DictWordMapper dictWordMapper;
 	
-	@Override
-	public List<Long> getWordId() {
-		return dictWordMapper.selectWordIdWithDictInfo();
-	}
+//	@Override
+//	public List<Long> getWordId() {
+//		return dictWordMapper.selectWordIdWithDictInfo();
+//	}
 
 	@Override
 	public void setDictWord(Long editedWordId, List<Integer> editedDictIdList) {
@@ -33,6 +34,12 @@ public class DictWordServiceImpl implements DictWordService {
 			
 		}
 	}
+	
+	@Override
+	public void setDictWord(Long wordId, Integer dictId) {
+		dictWordMapper.insertDictWordByWordIdAndDictId(wordId, dictId);
+		
+	}
 
 	@Override
 	public void deleteDictWordById(Long WordId) {
@@ -45,6 +52,15 @@ public class DictWordServiceImpl implements DictWordService {
 		dictWordMapper.deleteDictWordByDictId(dictId);
 		
 	}
+
+	@Override
+	public List<Dictionary> getDictListByWordId(Long wordId) {
+		
+		return dictWordMapper.selectDictListByWordId(wordId);
+	}
+
+
+
 
 
 

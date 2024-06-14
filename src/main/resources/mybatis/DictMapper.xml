@@ -13,10 +13,34 @@
 		    dictionary_word
 		ON 
 		    dictionarys.id = dictionary_word.dictionary_id
+		WHERE
+		    dictionarys.user_id = #{userId}
 		GROUP BY 
 		    dictionarys.id, dictionarys.name;
+		</select>
+		
+	<select id="selectDefaultDictById" resultType="Dictionary">
+		SELECT 
+		    d.id, 
+		    d.name, 
+		    COALESCE(COUNT(w.id), 0) AS word_amount
+		FROM 
+		    dictionarys d
+		LEFT JOIN 
+		    dictionary_word dw
+		ON 
+		    d.id = dw.dictionary_id
+		LEFT JOIN
+		    words w
+		ON
+		    dw.word_id = w.id
+		    AND w.user_id = #{userId}
+		WHERE
+		    d.id = #{dictId}  
+		GROUP BY 
+		    d.id, d.name;		
 	</select>
-	
+		    
 	<select id="selectDictById" parameterType="Integer" resultType="Dictionary">
 		SELECT
 			*
@@ -26,9 +50,14 @@
 			id = #{dictId}
 	</select>
 
-	<insert id="insertDict" parameterType="Dictionary">
-		INSERT INTO dictionarys (id, name)
-		VALUES (#{id}, #{name})
+	<insert id="insertDict" parameterType="map">
+		INSERT INTO
+			 dictionarys (`user_id`, `id`, `name`)
+		VALUES (
+			#{userId},
+			#{dict.id}, 
+			#{dict.name}
+		)
 	</insert>
 	
 	<select id="countDict" resultType="int">

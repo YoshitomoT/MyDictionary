@@ -12,10 +12,11 @@ public interface WordService {
     
     /**
      * 登録されているすべての単語を取得するメソッド。
+     * @param userId 
      * 
      * @return 単語のリスト。
      */
-    List<Word> getAll();
+    List<Word> getAll(Integer userId);
 
     /**
      * 指定されたIDに基づいて単語を取得するメソッド。
@@ -45,21 +46,22 @@ public interface WordService {
     /**
      * 編集されたWord情報を受け取り単語情報を更新するメソッド。
      *
-     * @param editedWord 更新したい単語のID+更新したい単語情報。
+     * @param word 更新したい単語のID+更新したい単語情報。
      * 
      */
-	void setEditedWord(Word editedWord);
+	void setEditedWord(Word word);
 
 	void deleteWordById(Long WordId);
 	
 	
     /**
      * 新規単語登録の際、入力項目の説明をWordに入れるメソッド。
+     * @param userId 
      *
      * @param addWord 更新したい単語のID+更新したい単語情報。
      * 
      */
-	void setNewWord(Word addWord);
+	void setNewWord(Integer userId, Word word);
 	
     /**
      * 新規単語登録の際、BDに最後に追加した単語のid情報を取得するメソッド。
@@ -71,11 +73,12 @@ public interface WordService {
 	
     /**
      * 登録している全単語数を取得するメソッド。
+     * @param userId 
      *
      * @return 登録している全単語数
      * 
      */
-	int getTotalWords();
+	int getTotalWords(Integer userId);
 	
 	
 
