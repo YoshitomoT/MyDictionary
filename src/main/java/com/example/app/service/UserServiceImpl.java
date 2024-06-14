@@ -16,27 +16,19 @@ public class UserServiceImpl implements UserService {
 	private final UserMapper userMapper;
 
 	@Override
-	public boolean isCorrectUserNameAndPassword(String userName, String password) {
-		
-		System.out.println("**************************" + userName);
-		System.out.println("**************************" + password);
-		User user = userMapper.selectByUserName(userName);
-		System.out.println("**************************" + user);
-		
-		if(user == null) {
-			return false;
-		}
-		
-//		if(!BCrypt.checkpw(password, user.getPassword())) {
-//			return false;
-//		} 
-		if(!password.equals(user.getPassword())) {
-			return false;
-		} 
-		
-		
-		
-		return true;
+	public void registerNewUser(UserRegistrationDTO userForm) {
+		// ユーザーの登録処理
+        User user = new User();
+        user.setUserName(userForm.getUserName());
+        user.setHashedPassword(BCrypt.hashpw(userForm.getPassword(), BCrypt.gensalt())); 
+
+        // 登録処理を行う（例: ユーザーをデータベースに保存）
+        save(user);
+	}
+	
+	@Override
+	public void save(User user) {
+		userMapper.insertUser(user);
 	}
 
 	@Override

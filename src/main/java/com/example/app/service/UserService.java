@@ -4,7 +4,9 @@ import com.example.app.domain.User;
 
 public interface UserService {
 	
-	boolean isCorrectUserNameAndPassword(String userName, String password);
+	void registerNewUser(UserRegistrationDTO userForm);
+	
+	void save(User user);
 
 	Integer getIdByUser(User user);
 
