@@ -16,17 +16,20 @@ public class DictServiceImpl implements DictService {
 	private final DictMapper dictMapper;
 
 	@Override
-	public List<Dictionary> getAll() {
-		return dictMapper.selectAll();
+	public List<Dictionary> getAll(Integer userId) {
+			List<Dictionary> dictList = dictMapper.selectAll(userId);
+			setDefaultDict(dictList, userId, 99);
+			System.out.println("dictList->" + dictList);
+		return dictList;
 	}
 
 	@Override
-	public void registerDict(Dictionary addDict) {
+	public void registerDict(Integer userId, Dictionary dict) {
 		
 		//その他辞典を最後にする形でidをインクリメントしたいから現在のカラム数を新規登録する辞典のid番号にする
 		int addId = dictMapper.countDict();
-		addDict.setId(addId);
-		dictMapper.insertDict(addDict);
+		dict.setId(addId);
+		dictMapper.insertDict(userId, dict);
 		
 	}
 
@@ -43,6 +46,12 @@ public class DictServiceImpl implements DictService {
 	@Override
 	public void setDictByDict(Dictionary dict) {
 		dictMapper.updateDict(dict);
+	}
+
+	@Override
+	public List<Dictionary> setDefaultDict(List<Dictionary> dictList, Integer userId, Integer dictId) {
+		dictList.add(dictMapper.selectDefaultDictById(userId, 99));
+		return dictList;
 	}
 
 }
