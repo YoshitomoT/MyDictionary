@@ -22,11 +22,7 @@
 					<th>登録している辞典</th>
 					<td>
 						<th:block th:each="registeredDict : *{registeredDictList}">
-								<p>
-									<a th:href="@{/dictionary(id=${registeredDict.id})}">
-										[[${registeredDict.name}]]
-								    </a>
-								</p>
+							<p>[[${registeredDict.name}]]</p>
 						</th:block>
 					</td>
 					
@@ -38,7 +34,7 @@
 				</tr>
 				<tr>
 					<th>詳細</th>
-					<td>[[*{detailedDescription}]]</td>
+					<td th:utext="*{detailedDescription}"></td>
 				</tr>
 				<tr>
 					<th>参照</th>

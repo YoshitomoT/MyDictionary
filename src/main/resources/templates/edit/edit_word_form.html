@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>[[${pageTitle}]]</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
+<script th:src="@{/js/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/js/tinymce/init-tinymce.js}"></script>
 </head>
 <body>
 
@@ -55,16 +57,16 @@
 				                               
 				<tr>
 					<th>シンプル意味</th>
-					<td><input type="text" th:field="*{simpleDescription}" /></td>
+					<td><input type="text" class="custom-input" th:field="*{simpleDescription}" /></td>
 				</tr>
 				<tr>
 					<th>詳細</th>
-					<td><textarea th:field="*{detailedDescription}" rows="6"
+					<td><textarea id="detailedDescription" class="custom-input" th:field="*{detailedDescription}" rows="6"
 							style="width: 300px;"></textarea></td>
 				</tr>
 				<tr>
 					<th>参照</th>
-					<td><input type="text" th:field="*{referenceUrl}" /></td>
+					<td><input type="text" class="custom-input" th:field="*{referenceUrl}" /></td>
 				</tr>
 			</table>
 			<input type="submit" value="送信">
