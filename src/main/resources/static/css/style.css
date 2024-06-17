@@ -3,7 +3,6 @@
 /* ページ全体のスタイル */
 body {
     font-family: Arial, sans-serif; /* フォント指定 */
-    line-height: 1.6; /* 行の高さ */
     margin: 0; /* 余白を0に */
     padding: 0; /* パディングを0に */
 }
@@ -12,10 +11,6 @@ body {
 h1 {
     display: flex;
     align-items: baseline; /* Baseline alignment to keep text inline */
-}
-
-h1 small {
-    font-size: 0.5em; /* Adjust the size to be smaller */
 }
 
 /* テーブルのスタイル */
@@ -59,8 +54,41 @@ p {
     padding: 8px; /* 適宜余白を調整 */
     box-sizing: border-box; /* paddingを含めたボックスモデル */
     border: 1px solid #ccc; /* ボーダーのスタイル */
-    border-radius: 4px; /* 角丸 */
     font-size: 14px; /* フォントサイズ */
 }
+
+.word-name {
+	font-weight: bold;
+	font-size: 2.0rem;
+    width: 35%;
+    margin-bottom: 0;  
+}
+
+.pronunciation {
+	font-size: 1.0rem;
+	width: 40%;
+}
+
+textarea {
+    margin: 0;
+}
+
+td.detailedDescription p {
+	margin: 0;
+}
+
+.word-detail-table th {
+	width: 20%;
+}
+
+.page-views {
+	text-align: right;
+	margin-top: 0;
+}
+
+
+
+
+
 
 
