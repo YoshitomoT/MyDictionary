@@ -2,6 +2,8 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>全単語一覧</title>
 
 <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -36,7 +38,7 @@
 		<li th:each="dict, status : ${dictList}" th:object="${dict}">
 			<!-- IDが99（未定義）の場合語尾に辞書をつけない -->
 			<th:block th:if="*{id == 99}">
-				[[${status.index + 1}]].[[*{name}]]:[[*{wordAmount}]]語
+				[[*{name}]]:[[*{wordAmount}]]語
 			</th:block>
 			<th:block th:if="*{id != 99}">
 				[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語

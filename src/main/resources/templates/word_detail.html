@@ -7,38 +7,33 @@
 </head>
 <body>
 	<th:block th:object=${word}>
-		<h1>[[*{name}]]
-			<small th:if="*{pronunciation} != null and *{pronunciation} != ''">
-			(読み方：[[*{pronunciation}]])
-			</small>
-
-		</h1>
+		<p class="word-name">
+			[[*{name}]]
+			<span class="pronunciation" th:if="*{pronunciation} != null and *{pronunciation} != ''">
+				(読み方：[[*{pronunciation}]])
+			</span>
+		</p>
+		<p class ="page-views"><span style="font-size: 1.5rem;">[[*{pageViews}]]</span>回閲覧</p>
 		<hr>
 		
 		<br>
-		<table border="1">
-			
+		<table class="word-detail-table" border="1">
 				<tr>
 					<th>登録している辞典</th>
 					<td>
 						<th:block th:each="registeredDict : *{registeredDictList}">
-								<p>
-									<a th:href="@{/dictionary(id=${registeredDict.id})}">
-										[[${registeredDict.name}]]
-								    </a>
-								</p>
+								<p>[[${registeredDict.name}]]</p>
 						</th:block>
-					</td>
-					
+					</td>	
 				</tr>
 				<tr>
-					<th>シンプル意味</th>
+					<th>意味</th>
 					<td>[[*{simpleDescription}]]</td>
 					
 				</tr>
 				<tr>
 					<th>詳細</th>
-					<td>[[*{detailedDescription}]]</td>
+					<td class="detailedDescription" th:utext="*{detailedDescription}"></td>
 				</tr>
 				<tr>
 					<th>参照</th>
@@ -46,15 +41,10 @@
 						<a th:href="*{referenceUrl}">[[*{referenceUrl}]]</a>
 					</td>
 				</tr>
-
-				
-				
-	
 		</table>
 					<p>単語登録日：[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
 					<p>更新日：[[*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
 					<p>最終閲覧日:[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm:ss')}]]</p>
-					<p>[[*{pageViews}]]回閲覧</p>
 	</th:block>	
 	<p><a th:href="@{/mydictionary/show/all}">一覧に戻る</a></p>
 
