@@ -12,10 +12,11 @@ public interface WordService {
     
     /**
      * 登録されているすべての単語を取得するメソッド。
+     * @param userId 
      * 
      * @return 単語のリスト。
      */
-    List<Word> getAll();
+    List<Word> getAll(Integer userId);
 
     /**
      * 指定されたIDに基づいて単語を取得するメソッド。
@@ -23,14 +24,64 @@ public interface WordService {
      * @param wordId 取得したい単語のID。
      * @return 指定されたIDに対応する単語。存在しない場合はnullまたは例外をスローする可能性があります。
      */
-    Word getWordById(Integer wordId);
+    Word getWordById(Long wordId);
     
+    
+    /**
+     * 指定されたIDに基づいて単語の閲覧回数を更新するメソッド。
+     * 
+     * @param id 更新したい単語のID。
+     * 
+     */
+    void setPageViewsForWordById(Long wordId);
+   
     /**
      * 指定されたIDに基づいて単語の最終閲覧日を更新するメソッド。
      * 
-     * @param wordId 取得したい単語のID。
+     * @param id 更新したい単語のID。
      * 
      */
+	void setLastViewedDateForWordById(Long wordId);
+	
+    /**
+     * 編集されたWord情報を受け取り単語情報を更新するメソッド。
+     *
+     * @param word 更新したい単語のID+更新したい単語情報。
+     * 
+     */
+	void setEditedWord(Word word);
 
-	void updateWordById(Integer wordId);
+	void deleteWordById(Long WordId);
+	
+	
+    /**
+     * 新規単語登録の際、入力項目の説明をWordに入れるメソッド。
+     * @param userId 
+     *
+     * @param addWord 更新したい単語のID+更新したい単語情報。
+     * 
+     */
+	void setNewWord(Integer userId, Word word);
+	
+    /**
+     * 新規単語登録の際、BDに最後に追加した単語のid情報を取得するメソッド。
+     *
+     * @return id BDに最後に追加した単語のid情報
+     * 
+     */
+	Long getLastInsertedId();
+	
+    /**
+     * 登録している全単語数を取得するメソッド。
+     * @param userId 
+     *
+     * @return 登録している全単語数
+     * 
+     */
+	int getTotalWords(Integer userId);
+	
+	
+
+	
+	
 }

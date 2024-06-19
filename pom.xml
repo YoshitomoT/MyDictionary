@@ -12,7 +12,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>MyDictionary</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MyDictionary</name>
+	<name>My辞典ず</name>
 	<description>単語登録・閲覧用アプリ</description>
 	<properties>
 		<java.version>17</java.version>
@@ -62,6 +62,21 @@
 			<artifactId>mybatis-spring-boot-starter-test</artifactId>
 			<version>3.0.3</version>
 			<scope>test</scope>
+		</dependency>
+		<!-- 別途追加：BCrypt -->
+		<dependency>
+			<groupId>de.svenkubiak</groupId>
+			<artifactId>jBCrypt</artifactId>
+			<version>0.4.3</version>
+		</dependency>
+		<!-- 別途追加：Spring Security -->
+<!-- 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

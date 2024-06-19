@@ -1,0 +1,86 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.DictMapper">
+	
+	<select id="selectAll" resultType="Dictionary">
+		SELECT 
+		    dictionarys.id, 
+		    dictionarys.name, 
+		    COALESCE(COUNT(dictionary_word.word_id), 0) AS word_amount
+		FROM 
+		    dictionarys
+		LEFT JOIN 
+		    dictionary_word
+		ON 
+		    dictionarys.id = dictionary_word.dictionary_id
+		WHERE
+		    dictionarys.user_id = #{userId}
+		GROUP BY 
+		    dictionarys.id, dictionarys.name;
+		</select>
+		
+	<select id="selectDefaultDictById" resultType="Dictionary">
+		SELECT 
+		    d.id, 
+		    d.name, 
+		    COALESCE(COUNT(w.id), 0) AS word_amount
+		FROM 
+		    dictionarys d
+		LEFT JOIN 
+		    dictionary_word dw
+		ON 
+		    d.id = dw.dictionary_id
+		LEFT JOIN
+		    words w
+		ON
+		    dw.word_id = w.id
+		    AND w.user_id = #{userId}
+		WHERE
+		    d.id = #{dictId}  
+		GROUP BY 
+		    d.id, d.name;		
+	</select>
+		    
+	<select id="selectDictById" parameterType="Integer" resultType="Dictionary">
+		SELECT
+			*
+		FROM
+			dictionarys
+		WHERE
+			id = #{dictId}
+	</select>
+
+	<insert id="insertDict" parameterType="map">
+		INSERT INTO
+			 dictionarys (`user_id`, `id`, `name`)
+		VALUES (
+			#{userId},
+			#{dict.id}, 
+			#{dict.name}
+		)
+	</insert>
+	
+	<select id="countDict" resultType="int">
+		SELECT 
+			COUNT(name)
+		FROM 
+			dictionarys;
+	</select>
+	
+	<delete id="deleteDict" parameterType="Integer">
+		DELETE FROM
+			dictionarys
+		WHERE 
+			id = #{dictId}
+	</delete>	
+	
+	<update id="updateDict" parameterType="Dictionary">
+		UPDATE
+			dictionarys
+		SET
+			name = #{name}
+		WHERE
+			id = #{id}
+	
+	</update>
+</mapper>

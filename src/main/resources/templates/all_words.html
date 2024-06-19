@@ -2,63 +2,124 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>全単語一覧</title>
-<!--  仮　　-->
-<style>
-        h1 {
-            display: flex;
-            align-items: baseline; /* Baseline alignment to keep text inline */
-        }
-        h1 small {
-            font-size: 0.5em; /* Adjust the size to be smaller */
-        }
-    </style>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
    
 </head>
 <body>
-	<h1>全単語一覧<small>Version0.5</small></h1>
+	<!--/********** ページタイトルとバージョン情報 ************************************************************/-->
+    <h1>---全単語一覧---</h1>
+	<!--/*********************************************************************************************/-->
 	
-	<hr>
-	<br>
-	
-	<table border="1">
-		<thead>
-			<tr>
-				<th>辞典名</th>
-				<th>単語</th>
-				<th>読み方</th>
-				<th>意味</th>
-				<th>登録日時</th>
-				<th>更新日時</th>
-				<th>最後に見た日時</th>
-				<th>閲覧回数</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="word : ${wordList}" th:object="${word}">
-				<td>
-				<th:block  th:each="registeredDict : *{registeredDictList}">
-				<p>
-				<a th:href="@{/dictionary(id=${registeredDict.id})}">
-				[[${registeredDict.name}]]
-				</a>
-				</p>	
-				</th:block>
-				</td>
-				<td>
-					<a th:href="@{/mydictionary/show/word{id}/{name}(id=*{id}, name=*{name})}">
-						[[*{name}]]
-					</a>
-				</td>
-				<td>[[*{pronunciation}]]</td>
-				<td>[[*{simpleDescription}]]</td>
-				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm')}]]</td>
-				<td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm')}]]</td>
-				<td>[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm')}]]</td>
-				<td>[[*{pageViews}]]</td>
-			</tr>
-		</tbody>	
-	</table>
+	<div class="login-user">
+	 	<p>
+			ログインユーザー: <span th:text="${session.user.userName}">Default UserName</span>
+		</p>
+	</div>
 
+	<!-- ログアウトボタン -->
+	<div class="logout-button">
+		<form th:action="@{/logout}" method="post">
+			<button type="submit">ログアウト</button>
+		</form>
+	</div>
+	
+	<!--/*********　新しい辞典と単語を追加するためのリンク ****************************************************/-->
+    <p>
+    	<a th:href="@{/mydictionary/dictionary/add}">新しい辞典を追加する</a>／
+		<a th:href="@{/mydictionary/word/add}">新しい単語を追加する</a>
+    </p>
+	<!--/********************************************************************************************/-->
+    
+    <hr>
+    
+	<!--/********** 単語登録数と各辞書の単語数の表示 ************************************************************/-->
+	<div class="dictionary-list">
+		<p>単語登録数：[[${totalWords}]]語</p>
+		<ul>
+			<li th:each="dict, status : ${dictList}" th:object="${dict}">
+				<!-- IDが99（未定義）の場合語尾に辞書をつけない -->
+				<th:block th:if="*{id == 99}">
+					<div class="unregistered" style="text-align: right;">
+						[[*{name}]]: [[*{wordAmount}]]語
+					</div>
+				</th:block>
+				<th:block th:if="*{id != 99}">
+					[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
+					
+		            <a th:href="@{/mydictionary/dictionary/edit(id=*{id})}">辞典名変更</a> <!-- 編集ボタン -->
+		            ／
+		            <a 
+						th:href="@{/mydictionary/dictionary/delete(id=*{id})}" 
+			            onclick="return confirm('この辞典を削除してもよろしいですか？\n※登録している辞典がなくなる単語は「未分類」にカテゴライズされます。')"
+		            >削除
+		            </a> <!-- 削除ボタン -->
+				</th:block>
+	
+			</li>
+		</ul>
+	</div>
+	<!--/*************************************************************************************************************/-->
+
+	<!--/********** ステータスメッセージの表示（あれば） ************************************************************/-->
+	<h2 th:if="${statusMessage}">[[${statusMessage}]]</h2>
+	<!--/*************************************************************************************************/-->
+	 
+	<!--/********** 単語一覧テーブル ************************************************************************/-->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>辞典名</th>
+                <th>単語</th>
+                <th>読み方</th>
+                <th>意味</th>
+                <th>登録日時</th>
+                <th>更新日時</th>
+                <th>最後に見た日時</th>
+                <th>閲覧回数</th>
+                <th>操作</th> <!-- 追加 -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="word : ${wordList}" th:object="${word}">
+                <td>
+                    <th:block  th:each="registeredDict : *{registeredDictList}">
+                        <p>
+							<!--/未実装
+                            <a th:href="@{/dictionary(id=${registeredDict.id})}">
+							/-->
+                                [[${registeredDict.name}]]
+                            <!--/未実装
+                            </a>
+                            /-->
+                        </p>    
+                    </th:block>
+                </td>
+                <td>
+                    <a th:href="@{/mydictionary/show/word{id}/{name}(id=*{id}, name=*{name})}">
+                        [[*{name}]]
+                    </a>
+                </td>
+                <td>[[*{pronunciation}]]</td>
+                <td>[[*{simpleDescription}]]</td>
+                <td>[[*{#temporals.format(registeredAt, 'yyyy/MM/dd HH:mm')}]]</td>
+                <td>[[*{#temporals.format(updatedAt, 'yyyy/MM/dd HH:mm')}]]</td>
+                <td>[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm')}]]</td>
+                <td>[[*{pageViews}]]</td>
+                <td>
+                    <a th:href="@{/mydictionary/word/edit(id=*{id})}">編集</a> <!-- 編集ボタン -->
+                    <a 
+	                    th:href="@{/mydictionary/word/delete(id=*{id})}" 
+	                    onclick="return confirm('削除してもよろしいですか？')"
+                    >削除</a> <!-- 削除ボタン -->
+                </td>
+            </tr>
+        </tbody>    
+    </table>
+	<!--/****************************************************************************************************/-->
+	<footer th:insert="~{fragments/parts :: page_footer}"></footer>
 </body>
 </html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>[[${pageTitle}]]</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <h1>---[[${pageTitle}]]---</h1>
+
+    <th:block th:object="${dictionary}">
+        <form th:action="@{/mydictionary/dictionary/add}" method="post">
+        <!-- <form th:action="@{/mydictionary/word/confirm(id=*{id}, name=*{name})}" method="get"> -->
+        
+        
+<!-- **********変更不可のフィールドは表示した内容そのままを送信パラメーターの値とする　************* -->    
+            <!-- ID 
+
+            -->
+            
+            <input type="hidden" th:field="*{id}" />
+            <input type="hidden" th:field="*{wordAmount}" />
+           
+            
+<!-- ***************************************************************** -->    
+
+            <table border="1">
+                <tr>
+                    <th>登録している辞典</th>
+                    <td>
+						<th:block th:each="dict, status : ${dictList}">
+								<p>[[${status.index + 1}]].[[${dict.name}]]</p>
+	    				</th:block>
+                    </td>
+                </tr>                           
+                <tr>
+                    <th>辞典名</th>
+                    <td><input type="text" th:field="*{name}" th:placeholder="'20文字以内で入力してください'" maxlength="20" required />辞典</td>
+                </tr>
+            </table>
+            <input type="submit" value="送信">
+        </form>
+    </th:block>
+    <p>
+        <a th:href="@{/mydictionary/show/all}">一覧に戻る</a>
+    </p>
+	<footer th:insert="~{fragments/parts :: page_footer}"></footer>
+</body>
+</html>
