@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>新規ユーザー登録</title>
-    <link rel="stylesheet" th:href="@{styles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="register-container">
-        <h2>新規ユーザー登録</h2>
+        <h1>新規ユーザー登録</h1>
         
+        <p th:text="${errorMessage}" class="error-message"></p>
         <form th:action="@{/registerUser}" method="POST">
         	<th:block th:object="${newUser}">
 				<div class="form-group">
@@ -23,8 +24,7 @@
 				<div>
 					<label for="confirmPassword">確認用パスワード:</label> 
 					<input type="password" th:field="*{confirmPassword}" />
-					<p th:if="${#fields.hasErrors('confirmPassword')}"
-						th:errors="*{confirmPassword}"></p>
+
 				</div>
 				<br>
 				<button type="submit">登録する</button>
