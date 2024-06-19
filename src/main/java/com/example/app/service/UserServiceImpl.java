@@ -26,12 +26,12 @@ public class UserServiceImpl implements UserService {
 		
         // パスワードの一致チェック
         if (!userForm.isPasswordMatching()) {
-            throw new PasswordsNotMatchingException("パスワードと確認用パスワードが一致しません。");
+            throw new PasswordsNotMatchingException("※パスワードと確認用パスワードが一致しません。");
         }
         
         // ユーザー名の重複チェック
         if (!isUserNameUnique(userForm.getUserName())) {
-            throw new UserAlreadyExistsException("ユーザー名「 " + userForm.getUserName() + " 」は既に使用されています。別のユーザー名を指定してください。");
+            throw new UserAlreadyExistsException("※ユーザー名「 " + userForm.getUserName() + " 」は既に使用されています。別のユーザー名を指定してください。");
         }
         
 		// ユーザーの登録処理
