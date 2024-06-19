@@ -7,11 +7,116 @@ body {
     padding: 0; /* パディングを0に */
 }
 
-/* 見出しのスタイル */
+/* ページタイトルのスタイル */
 h1 {
-    display: flex;
-    align-items: baseline; /* Baseline alignment to keep text inline */
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
 }
+
+/* ログインユーザー表示部分のスタイル */
+.login-user p {
+    text-align: right;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* ログアウトボタンのスタイル */
+.logout-button form {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.logout-button form button {
+    padding: 2px 10px;
+    font-size: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.logout-button form button:hover {
+    background-color: #45a049;
+}
+
+
+
+/* 辞書リスト全体のスタイル */
+.dictionary-list {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 単語登録数のスタイル */
+.dictionary-list p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+/* リストのスタイル */
+.dictionary-list ul {
+    list-style-type: none; /* デフォルトの黒丸を消す */
+    padding: 0;
+    margin: 0;
+}
+
+/* リストアイテムのスタイル */
+.dictionary-list li {
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1em;
+}
+
+/* 最後のリストアイテムのボーダーを消す */
+.dictionary-list li:last-child {
+    border-bottom: none;
+    align-items: right;
+}
+
+/* リストアイテム内のインデックスとテキストのスタイル */
+.dictionary-list li th:block {
+    display: inline-block;
+}
+
+/* 辞書名と単語数のスタイル */
+.dictionary-list .dictionary-name {
+    font-weight: bold;
+    color: #007BFF;
+    margin-right: 10px;
+}
+
+.dictionary-list .word-count {
+    color: #777;
+}
+
+/* リンクのスタイル */
+.dictionary-list a {
+    color: #007BFF;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 0.9em;
+}
+
+.dictionary-list a:hover {
+    text-decoration: underline;
+}
+
+/* リストアイテムのホバー時のスタイル */
+.dictionary-list li:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s;
+}
+
 
 /* テーブルのスタイル */
 table {
@@ -46,6 +151,10 @@ a:hover {
 /* ページ内のパラグラフのスタイル */
 p {
     margin-bottom: 10px; /* パラグラフの下に余白を設定 */
+}
+
+footer p {
+	align-items: center;
 }
 
 .custom-input {
