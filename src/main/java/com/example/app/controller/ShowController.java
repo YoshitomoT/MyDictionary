@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mydictionary/show")
+@RequestMapping("/mydictionarys/show")
 public class ShowController {
 
     private final WordService wordService;

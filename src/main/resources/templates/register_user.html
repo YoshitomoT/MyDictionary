@@ -11,7 +11,7 @@
         <h1>新規ユーザー登録</h1>
         
         <p th:text="${errorMessage}" class="error-message"></p>
-        <form th:action="@{/registerUser}" method="POST">
+        <form th:action="@{/mydictionarys/registerUser}" method="POST">
         	<th:block th:object="${newUser}">
 				<div class="form-group">
 					<label for="userName">ユーザー名</label> 
@@ -26,7 +26,7 @@
 				<button type="submit">登録する</button>
 			</th:block>
         </form>
-        <a th:href="@{/login}">ログイン画面に戻る</a>
+        <a th:href="@{/mydictionarys/login}">ログイン画面に戻る</a>
     </div>
     <footer th:insert="~{fragments/parts :: page_footer}"></footer>
 </body>
