@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
-    <link rel="stylesheet" th:href="@{styles.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <div class="login-container">
-        <h2>My辞典ず</h2>
-        <p th:if="${errorMessage}">[[${errorMessage}]]</p>
+        <h1>My辞典ず</h1>
+        <p th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></p>
+        <h2 th:if="${statusMessage}" th:text="${statusMessage}"></h2>
         <form th:action="@{/login}" method="POST">
         	<th:block th:object="${user}">
 				<div class="form-group">
