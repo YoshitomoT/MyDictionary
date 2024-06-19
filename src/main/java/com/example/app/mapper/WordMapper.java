@@ -3,18 +3,34 @@ package com.example.app.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.app.domain.Word;
 
 @Mapper
 public interface WordMapper {
 	
-	List<Word> selectAll();
+	List<Word> selectAll(Integer userId);
+	
+	List<Word> selectAllWithDict();
 
-	Word selectWordById(Integer wordId);
+	Word selectWordById(Long wordId);
 
-	Integer incrementPageViews(Integer wordId);
+	Integer incrementPageViews(Long wordId);
 
-	void updateLastViewById(Integer wordId);
+	void updateWordLastViewedById(Long wordId);
+
+	void updateWordByEditedWord(Word editedWord);
+
+	void deleteWordById(Long wordId);
+
+	void insertWord(@Param("userId") Integer userId, @Param("word") Word word);
+
+	Long selectLastInsertedId();
+
+	int countTotalWords(Integer userId);
+
+
+	
 
 }

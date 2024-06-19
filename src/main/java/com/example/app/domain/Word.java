@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class Word {
 	
-	private Integer id;
+	private Long id;
 	
 	//登録している辞典名
 	private List<Dictionary> registeredDictList;
@@ -25,6 +25,9 @@ public class Word {
 	
 	//詳細な説明
 	private String detailedDescription;
+	
+	//参照するURL
+	private String referenceUrl;
 	
 	//登録日時
 	private LocalDateTime registeredAt;
