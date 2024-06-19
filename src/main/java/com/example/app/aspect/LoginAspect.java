@@ -26,14 +26,15 @@ public class LoginAspect {
     public Object checkLogin(
     		ProceedingJoinPoint joinPoint
     ) throws Throwable {
-        System.out.println("*************check****************");
+        System.out.println("*************check****************" + joinPoint);
     	HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             // ログインしていない場合は、ログインページへのリダイレクトを行う
-        	return "redirect:/timeout";
+            return "redirect:/timeout";
         } else {
-            // ログイン済みの場合は、該当のコントローラーの処理を続行する
+            // ログイン済みの場合は、通常の処理を続行
             return joinPoint.proceed();
         }
     }
+
 }

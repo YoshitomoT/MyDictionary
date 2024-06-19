@@ -8,6 +8,8 @@ import com.example.app.domain.User;
 import com.example.app.dto.LoginFormDTO;
 import com.example.app.dto.UserRegistrationDTO;
 import com.example.app.dto.UserSessionDTO;
+import com.example.app.exception.UserRegistrationException.PasswordsNotMatchingException;
+import com.example.app.exception.UserRegistrationException.UserAlreadyExistsException;
 import com.example.app.mapper.UserMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -20,20 +22,33 @@ public class UserServiceImpl implements UserService {
 	private final UserMapper userMapper;
 	
 	@Override
-	public void registerNewUser(UserRegistrationDTO userForm) {
+	public void registerNewUser(UserRegistrationDTO userForm) throws Exception {
+		
+        // パスワードの一致チェック
+        if (!userForm.isPasswordMatching()) {
+            throw new PasswordsNotMatchingException("※パスワードと確認用パスワードが一致しません。");
+        }
+        
+        // ユーザー名の重複チェック
+        if (!isUserNameUnique(userForm.getUserName())) {
+            throw new UserAlreadyExistsException("※ユーザー名「 " + userForm.getUserName() + " 」は既に使用されています。別のユーザー名を指定してください。");
+        }
+        
 		// ユーザーの登録処理
         User user = new User();
         user.setUserName(userForm.getUserName());
         user.setHashedPassword(BCrypt.hashpw(userForm.getPassword(), BCrypt.gensalt())); 
 
         // 登録処理を行う（例: ユーザーをデータベースに保存）
-        save(user);
+        userMapper.insertUser(user);
 	}
 	
 	@Override
-	public void save(User user) {
-		userMapper.insertUser(user);
+	public boolean isUserNameUnique(String userName) {
+		User exsitingUser = userMapper.selectByUserName(userName);
+		return exsitingUser ==null;
 	}
+	
 	
 	@Override
 	public Integer getIdByUser(User user) {

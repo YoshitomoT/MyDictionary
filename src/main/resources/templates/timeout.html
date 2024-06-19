@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>セッションタイムアウト</title>
@@ -10,5 +10,6 @@
 	        <p>セッションがタイムアウトしました。再度ログインしてください。</p>
 	        <a href="/login" class="login-link">ログインする</a>
 	 </div>
+<footer th:insert="~{fragments/parts :: page_footer}"></footer>
 </body>
 </html>

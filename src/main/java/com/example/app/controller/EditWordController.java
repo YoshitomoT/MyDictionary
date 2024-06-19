@@ -92,7 +92,7 @@ public class EditWordController {
         model.addAttribute("pageTitle", "単語の編集");
         model.addAttribute("word", word);
         model.addAttribute("dictList", dictService.getAll(userId));
-        return "edit/word_form";
+        return "edit/edit_word_form";
     }
 
     //編集した単語の登録を行うメソッド

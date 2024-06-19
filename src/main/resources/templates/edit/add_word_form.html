@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <title>[[${pageTitle}]]</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
-<script th:src="@{/js/validate.js}"></script>
+<script th:src="@{/js/tinymce/tinymce.min.js}"></script>
+<script th:src="@{/js/tinymce/init-tinymce.js}"></script>
+
 </head>
 <body>
 
@@ -31,10 +33,10 @@
             <input type="hidden" th:field="*{pageViews}" />
             
 <!-- ***************************************************************** -->    
-            <h1>
-                <input type="text" th:field="*{name}" th:placeholder="'ここに単語名を入力してください。※1～50文字以内'" maxlength="50" required />
-                <small>(読み方：<input type="text" th:field="*{pronunciation}" th:placeholder="'ここに読み方を入力してください。※1～50文字以内'" maxlength="50" />)</small>
-            </h1>
+            <p>
+                <input type="text" class="word-name" th:field="*{name}" th:placeholder="'ここに単語名を入力してください。'" maxlength="50" required />
+                <label class="pronunciation">(読み方：<input type="text" th:field="*{pronunciation}" th:placeholder="'ここに読み方を入力してください。'" maxlength="50" />)</label>
+            </p>
 
             <hr>
 
@@ -43,32 +45,26 @@
                 <tr>
                     <th>登録している辞典</th>
                     <td>
-						<th:block th:each="dict, status : ${dictList}">
-							<th:block th:if="${dict.id != 99}">
-							    <input type="checkbox" 
-							           name="registeredDictIdList"
-							           th:value="${dict.id}"
-							           class="dict-checkbox">
-							           [[${status.index + 1}]].[[${dict.name}]]
-							</th:block>
+						<th:block th:each="dict, status : ${dictList}" th:if="${dict.id != 99}">
+							<input type="checkbox" name="registeredDictIdList" th:value="${dict.id}" class="dict-checkbox">
+							[[${status.index + 1}]].[[${dict.name}]]
 						</th:block>
-
-						
 					</td>
                 </tr>
                                                
                 <tr>
                     <th>シンプル意味</th>
-                    <td><input type="text" th:field="*{simpleDescription}" th:placeholder="*{simpleDescription}" maxlength="30" required /></td>
+                    <td><input type="text" class="custom-input" th:field="*{simpleDescription}" th:placeholder="*{simpleDescription}" maxlength="30" required /></td>
                 </tr>
                 <tr>
                     <th>詳細</th>
-                    <td><textarea th:field="*{detailedDescription}" rows="6"
-                            style="width: 300px;" th:placeholder="'ここにより具体的な説明文を入力してください。'"></textarea></td>
+                    <td><textarea id="detailedDescription" th:field="*{detailedDescription}" rows="6"
+                            style="width: 300px;" th:placeholder="'ここにより具体的な説明文を入力してください。'"></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <th>参照</th>
-                    <td><input type="text" th:field="*{referenceUrl}" th:placeholder="'ここに登録したいURLを入力してください。※1～50文字以内'" maxlength="50" /></td>
+                    <td><input type="text" class="custom-input" th:field="*{referenceUrl}" th:placeholder="'ここに登録したいURLを入力してください。※1～50文字以内'" maxlength="50" /></td>
                 </tr>
             </table>
             <!-- <input type="submit" onclick="return validateCheckboxes()" value="登録"> -->
@@ -79,6 +75,7 @@
     <p>
         <a th:href="@{/mydictionary/show/all}">一覧に戻る</a>
     </p>
+    <footer th:insert="~{fragments/parts :: page_footer}"></footer>
 
 </body>
 </html>

@@ -7,9 +7,9 @@ import com.example.app.dto.UserSessionDTO;
 
 public interface UserService {
 	
-	void registerNewUser(UserRegistrationDTO userForm);
+	void registerNewUser(UserRegistrationDTO userForm) throws Exception;
 	
-	void save(User user);
+	boolean isUserNameUnique(String userName);
 	
 	Integer getIdByUser(User user);
 

@@ -2,6 +2,8 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>全単語一覧</title>
 
 <link rel="stylesheet" th:href="@{/css/style.css}">
@@ -9,17 +11,21 @@
 </head>
 <body>
 	<!--/********** ページタイトルとバージョン情報 ************************************************************/-->
-    <h1>全単語一覧<small>Version2.0</small></h1>
+    <h1>---全単語一覧---</h1>
 	<!--/*********************************************************************************************/-->
-
- 	<p>
-		ログインユーザー: <span th:text="${session.user.userName}">Default UserName</span>
-	</p>
+	
+	<div class="login-user">
+	 	<p>
+			ログインユーザー: <span th:text="${session.user.userName}">Default UserName</span>
+		</p>
+	</div>
 
 	<!-- ログアウトボタン -->
-	<form th:action="@{/logout}" method="post">
-		<button type="submit">ログアウト</button>
-	</form>
+	<div class="logout-button">
+		<form th:action="@{/logout}" method="post">
+			<button type="submit">ログアウト</button>
+		</form>
+	</div>
 	
 	<!--/*********　新しい辞典と単語を追加するためのリンク ****************************************************/-->
     <p>
@@ -31,27 +37,31 @@
     <hr>
     
 	<!--/********** 単語登録数と各辞書の単語数の表示 ************************************************************/-->
-	<p>単語登録数：[[${totalWords}]]語</p>
-	<ul>
-		<li th:each="dict, status : ${dictList}" th:object="${dict}">
-			<!-- IDが99（未定義）の場合語尾に辞書をつけない -->
-			<th:block th:if="*{id == 99}">
-				[[${status.index + 1}]].[[*{name}]]:[[*{wordAmount}]]語
-			</th:block>
-			<th:block th:if="*{id != 99}">
-				[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
-				
-	            <a th:href="@{/mydictionary/dictionary/edit(id=*{id})}">辞典名変更</a> <!-- 編集ボタン -->
-	            ／
-	            <a 
-					th:href="@{/mydictionary/dictionary/delete(id=*{id})}" 
-		            onclick="return confirm('この辞典を削除してもよろしいですか？\n※登録している辞典がなくなる単語は「未分類」にカテゴライズされます。')"
-	            >削除
-	            </a> <!-- 削除ボタン -->
-			</th:block>
-
-		</li>
-	</ul>
+	<div class="dictionary-list">
+		<p>単語登録数：[[${totalWords}]]語</p>
+		<ul>
+			<li th:each="dict, status : ${dictList}" th:object="${dict}">
+				<!-- IDが99（未定義）の場合語尾に辞書をつけない -->
+				<th:block th:if="*{id == 99}">
+					<div class="unregistered" style="text-align: right;">
+						[[*{name}]]: [[*{wordAmount}]]語
+					</div>
+				</th:block>
+				<th:block th:if="*{id != 99}">
+					[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
+					
+		            <a th:href="@{/mydictionary/dictionary/edit(id=*{id})}">辞典名変更</a> <!-- 編集ボタン -->
+		            ／
+		            <a 
+						th:href="@{/mydictionary/dictionary/delete(id=*{id})}" 
+			            onclick="return confirm('この辞典を削除してもよろしいですか？\n※登録している辞典がなくなる単語は「未分類」にカテゴライズされます。')"
+		            >削除
+		            </a> <!-- 削除ボタン -->
+				</th:block>
+	
+			</li>
+		</ul>
+	</div>
 	<!--/*************************************************************************************************************/-->
 
 	<!--/********** ステータスメッセージの表示（あれば） ************************************************************/-->
@@ -59,7 +69,7 @@
 	<!--/*************************************************************************************************/-->
 	 
 	<!--/********** 単語一覧テーブル ************************************************************************/-->
-    <table border="0.5">
+    <table border="1">
         <thead>
             <tr>
                 <th>辞典名</th>
@@ -110,6 +120,6 @@
         </tbody>    
     </table>
 	<!--/****************************************************************************************************/-->
-
+	<footer th:insert="~{fragments/parts :: page_footer}"></footer>
 </body>
 </html>
