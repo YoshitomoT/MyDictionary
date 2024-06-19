@@ -86,6 +86,14 @@ td.detailedDescription p {
 	margin-top: 0;
 }
 
+/* エラーメッセージのスタイル */
+.error-message {
+    color: #ff6347; /* エラーメッセージの赤色 */
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+
 
 
 
