@@ -30,7 +30,7 @@ public class LoginAspect {
     	HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             // ログインしていない場合は、ログインページへのリダイレクトを行う
-            return "redirect:/timeout";
+            return "redirect:/mydictionarys/timeout";
         } else {
             // ログイン済みの場合は、通常の処理を続行
             return joinPoint.proceed();

@@ -22,15 +22,15 @@
 
 	<!-- ログアウトボタン -->
 	<div class="logout-button">
-		<form th:action="@{/logout}" method="post">
+		<form th:action="@{/mydictionarys/logout}" method="post">
 			<button type="submit">ログアウト</button>
 		</form>
 	</div>
 	
 	<!--/*********　新しい辞典と単語を追加するためのリンク ****************************************************/-->
     <p>
-    	<a th:href="@{/mydictionary/dictionary/add}">新しい辞典を追加する</a>／
-		<a th:href="@{/mydictionary/word/add}">新しい単語を追加する</a>
+    	<a th:href="@{/mydictionarys/dictionary/add}">新しい辞典を追加する</a>／
+		<a th:href="@{/mydictionarys/word/add}">新しい単語を追加する</a>
     </p>
 	<!--/********************************************************************************************/-->
     
@@ -50,10 +50,10 @@
 				<th:block th:if="*{id != 99}">
 					[[${status.index + 1}]].[[*{name}]]辞典:[[*{wordAmount}]]語
 					
-		            <a th:href="@{/mydictionary/dictionary/edit(id=*{id})}">辞典名変更</a> <!-- 編集ボタン -->
+		            <a th:href="@{/mydictionarys/dictionary/edit(id=*{id})}">辞典名変更</a> <!-- 編集ボタン -->
 		            ／
 		            <a 
-						th:href="@{/mydictionary/dictionary/delete(id=*{id})}" 
+						th:href="@{/mydictionarys/dictionary/delete(id=*{id})}" 
 			            onclick="return confirm('この辞典を削除してもよろしいですか？\n※登録している辞典がなくなる単語は「未分類」にカテゴライズされます。')"
 		            >削除
 		            </a> <!-- 削除ボタン -->
@@ -75,7 +75,7 @@
                 <th>辞典名</th>
                 <th>単語</th>
                 <th>読み方</th>
-                <th>意味</th>
+                <th>シンプル意味</th>
                 <th>登録日時</th>
                 <th>更新日時</th>
                 <th>最後に見た日時</th>
@@ -99,7 +99,7 @@
                     </th:block>
                 </td>
                 <td>
-                    <a th:href="@{/mydictionary/show/word{id}/{name}(id=*{id}, name=*{name})}">
+                    <a th:href="@{/mydictionarys/show/word{id}/{name}(id=*{id}, name=*{name})}">
                         [[*{name}]]
                     </a>
                 </td>
@@ -110,9 +110,9 @@
                 <td>[[*{#temporals.format(lastViewAt, 'yyyy/MM/dd HH:mm')}]]</td>
                 <td>[[*{pageViews}]]</td>
                 <td>
-                    <a th:href="@{/mydictionary/word/edit(id=*{id})}">編集</a> <!-- 編集ボタン -->
+                    <a th:href="@{/mydictionarys/word/edit(id=*{id})}">編集</a> <!-- 編集ボタン -->
                     <a 
-	                    th:href="@{/mydictionary/word/delete(id=*{id})}" 
+	                    th:href="@{/mydictionarys/word/delete(id=*{id})}" 
 	                    onclick="return confirm('削除してもよろしいですか？')"
                     >削除</a> <!-- 削除ボタン -->
                 </td>

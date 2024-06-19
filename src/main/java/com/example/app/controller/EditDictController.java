@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mydictionary/dictionary")
+@RequestMapping("/mydictionarys/dictionary")
 public class EditDictController {
 	
 	private final DictService dictService;
@@ -55,7 +55,7 @@ public class EditDictController {
 		rs.addFlashAttribute("statusMessage", "「" + addDict.getName() + "」という辞典を新しく登録しました。");
 		
 		// リダイレクト先を指定
-		return "redirect:/mydictionary/show/all";
+		return "redirect:/mydictionarys/show/all";
 	}
 
 	@GetMapping("/edit")
@@ -81,7 +81,7 @@ public class EditDictController {
 				"statusMessage", "辞典名「" + oldName + "」を「" 
 						+ dictService.getDictById(dict.getId()).getName() + "」に変更しました。"
 		);
-		return "redirect:/mydictionary/show/all";
+		return "redirect:/mydictionarys/show/all";
 	}
 	
 	@GetMapping("/delete")
@@ -99,7 +99,7 @@ public class EditDictController {
 		//一覧ページに表示するフラッシュメッセージの格納
 		rs.addFlashAttribute("statusMessage", "「" + dict.getName() + "」という辞典を削除しました。");
 		// リダイレクト先を指定
-		return "redirect:/mydictionary/show/all";
+		return "redirect:/mydictionarys/show/all";
 	}
 
 

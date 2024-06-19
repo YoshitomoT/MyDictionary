@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.dto.UserRegistrationDTO;
@@ -18,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/mydictionarys")
 public class RegisterUserController {
 
     private final UserService userService;
@@ -37,16 +39,16 @@ public class RegisterUserController {
 	    try {
 	        // パスワードの一致チェックとユーザーの登録
 	        userService.registerNewUser(userForm);
-	        redirectAttributes.addFlashAttribute("statusMessage", "ユーザー登録完了しました。ログインしてください。");
-	        return "redirect:/login"; // 登録成功時はログインページにリダイレクト
+	        redirectAttributes.addFlashAttribute("statusMessage", "ユーザー登録完了しました。");
+	        return "redirect:/mydictionarys/login"; // 登録成功時はログインページにリダイレクト
 
 	    } catch (PasswordsNotMatchingException e) {
 	        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-	        return "redirect:/registerUser"; // エラーがある場合は登録ページにリダイレクト
+	        return "redirect:/mydictionarys/registerUser"; // エラーがある場合は登録ページにリダイレクト
 
 	    } catch (UserAlreadyExistsException e) {
 	        redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-	        return "redirect:/registerUser"; // エラーがある場合は登録ページにリダイレクト
+	        return "redirect:/mydictionarys/registerUser"; // エラーがある場合は登録ページにリダイレクト
 	    }
 	}
 

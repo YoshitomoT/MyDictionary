@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.app.dto.LoginFormDTO;
@@ -16,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/mydictionarys")
 public class LoginController {
 	
 	private final UserService userService;
@@ -41,12 +43,12 @@ public class LoginController {
 		if(userSessionDTO == null) {
 			model.addAttribute("user", new LoginFormDTO());
 			rs.addFlashAttribute("errorMessage", "※ユーザー名かパスワードが違います。");
-			return "redirect:/login";
+			return "redirect:/";
 		}
 		
 		session.setAttribute("user", userSessionDTO);
 		System.out.println("ログイン情報" + userSessionDTO);
-		return "redirect:/mydictionary/show/all";
+		return "redirect:/mydictionarys/show/all";
 		
 	}
 	
@@ -56,7 +58,7 @@ public class LoginController {
         session.invalidate();
 
         // ログアウト後にホームページにリダイレクト
-        return "redirect:/login";
+        return "redirect:/";
     }
 	
 	@GetMapping("/timeout")

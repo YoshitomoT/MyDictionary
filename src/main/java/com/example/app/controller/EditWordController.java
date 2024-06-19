@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/mydictionary/word")
+@RequestMapping("/mydictionarys/word")
 public class EditWordController {
 
     private final WordService wordService;
@@ -76,7 +76,7 @@ public class EditWordController {
 		rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を登録しました。");
 		
 		// リダイレクト先を指定
-		return "redirect:/mydictionary/show/all"; 
+		return "redirect:/mydictionarys/show/all"; 
 	}
 
 	
@@ -118,7 +118,7 @@ public class EditWordController {
 	    rs.addFlashAttribute("statusMessage", "単語「" + editedWord.getName() + "」を更新しました。");
 	    
 	    // リダイレクト先を指定
-	    return "redirect:/mydictionary/show/all"; 
+	    return "redirect:/mydictionarys/show/all"; 
 	}
 
 	
@@ -143,6 +143,6 @@ public class EditWordController {
 	    rs.addFlashAttribute("statusMessage", "単語「" + word.getName() + "」を削除しました。");
     	
     	//リダイレクト先を指定
-	    return "redirect:/mydictionary/show/all"; 
+	    return "redirect:/mydictionarys/show/all"; 
 	}
 }
